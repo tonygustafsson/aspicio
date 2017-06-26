@@ -60,3 +60,4 @@ typings/
 /log/*
 /error/*
 /status/*
+/server/node_modules/
