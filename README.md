@@ -5,6 +5,9 @@ It also have a nodejs express web server that will show a dashboard with all the
 
 startJobs.sh is using webCheck.sh to check servers with curl. This is scheduled with a cron job.
 
+Oh, and it has Slack support. It shouts out to a #channel when servers are down.
+For this to work you need to edit webCheck.sh.
+
 ## Install debian packages
 `sudo npm install nodejs npm`
 
@@ -26,6 +29,7 @@ startJobs.sh is using webCheck.sh to check servers with curl. This is scheduled 
 And add the following:
 
 `*/2 * * * * ~/webmonitor/startJobs.sh`
+
 `@reboot nodejs ~/webmonitor/server/server.js`
 
 ## Directories
