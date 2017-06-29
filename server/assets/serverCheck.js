@@ -3,6 +3,7 @@
     var container = document.getElementById("servers"),
         header = document.getElementById("header"),
         offlineWarning = document.getElementById("offlineWarning"),
+        serverErrorWarning = document.getElementById("serverErrorWarning"),
         getServerCheckTimer = null;
 
     function makeServerActive(element) {
@@ -54,14 +55,18 @@
                     header.className = "header";
                     document.title = "Server Check";
                 }
+
+                serverErrorWarning.className = "server-error-warning";
             }
             else {
                 // We reached our target server, but it returned an error
+                serverErrorWarning.className = "server-error-warning active";
             }
         };
 
         request.onerror = function () {
             // There was a connection error of some sort
+            serverErrorWarning.className = "server-error-warning active";
         };
 
         request.send();

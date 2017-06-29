@@ -34,7 +34,7 @@ function webCheck {
 			touch "${statusPath}_down.status";
 
             if "$enableSlack" = "true"; then
-                slackError="$monitorName ($url) did not contain the correct keyword. Is it down?";
+                slackError="$monitorName ($url) did not contain the correct keyword. Is it down? <http://192.168.10.230:3000/|Click here> for more info.";
                 curl -X POST --data-urlencode "payload={'username': 'WebMonitor', 'text': '$slackError', 'icon_emoji': ':warning:'}" https://hooks.slack.com/services/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
             fi
         fi
@@ -47,7 +47,7 @@ function webCheck {
 		touch "${statusPath}_down.status";
 
         if "$enableSlack" = "true"; then
-            slackError="$monitorName ($url) did not respond. Is it down?";
+            slackError="$monitorName ($url) did not respond with HTTP 200 (OK). Is it down? <http://192.168.10.230:3000/|Click here> for more info.";
             curl -X POST --data-urlencode "payload={'username': 'WebMonitor', 'text': '$slackError', 'icon_emoji': ':warning:'}" https://hooks.slack.com/services/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
         fi
 	fi

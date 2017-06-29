@@ -35,6 +35,21 @@ a {
     background: darkorange;
 }
 
+.server-error-warning {
+    display: none;
+}
+
+.server-error-warning.active {
+    display: block;
+}
+
+.server-error-warning h1 {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    background: darkred;
+}
+
 .servers {
     display: flex;
     flex-flow: row wrap;

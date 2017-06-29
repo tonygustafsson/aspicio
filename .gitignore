@@ -62,3 +62,5 @@ startJobs.sh
 /error/*
 /status/*
 /server/node_modules/
+startJobs.sh
+
