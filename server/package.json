@@ -1,17 +1,17 @@
 {
-  "name": "webmonitor",
-  "version": "1.0.0",
-  "description": "A web monitor for watching servers",
-  "main": "server.js",
-  "dependencies": {
-    "express": "^4.15.3",
-    "fs": "^0.0.1-security"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "author": "Tony Gustafsson",
-  "license": "ISC"
+    "name": "webmonitor",
+    "version": "1.0.0",
+    "description": "A web monitor for watching servers",
+    "main": "server.js",
+    "dependencies": {
+        "express": "^4.15.3",
+        "fs": "^0.0.1-security"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node server.js"
+    },
+    "author": "Tony Gustafsson",
+    "license": "ISC"
 }

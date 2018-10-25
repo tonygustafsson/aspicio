@@ -1,7 +1,7 @@
 body {
     background: #171717;
     color: #fff;
-    font-family: 'Lato', sans-serif;;
+    font-family: 'Lato', sans-serif;
     font-weight: lighter;
 }
 
@@ -73,7 +73,7 @@ a {
 }
 
 .server-slow {
-    background: rgba(212, 205, 0, 0.8)
+    background: rgba(212, 205, 0, 0.8);
 }
 
 .server-down {
@@ -101,7 +101,7 @@ a {
 }
 
 .top-links a {
-    padding-left: .5em;
+    padding-left: 0.5em;
 }
 
 @media (min-width: 1600px) {
