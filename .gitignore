@@ -58,9 +58,7 @@ typings/
 .env
 
 startJobs.sh
-/log/*
-/error/*
-/status/*
+/monitor/log/*.log
+/monitor/error/*.log
+/monitor/status/*.status
 /server/node_modules/
-startJobs.sh
-
