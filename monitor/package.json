@@ -1,0 +1,15 @@
+{
+    "name": "webmonitor-monitor",
+    "version": "1.0.0",
+    "description": "The monitor checking the services",
+    "main": "monitor.js",
+    "dependencies": {
+        "axios": "^0.18.0"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Tony Gustafsson",
+    "license": "ISC"
+}
