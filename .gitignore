@@ -57,6 +57,8 @@ typings/
 # dotenv environment variables file
 .env
 
+/**/package-lock.json
+
 startJobs.sh
 /monitor/log/*.log
 /monitor/error/*.log
