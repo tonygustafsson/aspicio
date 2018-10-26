@@ -4,14 +4,14 @@ const moment = require('moment');
 const fs = require('fs');
 
 const log = {
-    _log: (level, name, url, message, loadTime) => {
+    _log: (level = 'info', name, url, message, requestTime = 0) => {
         let logObj = {
             level: level,
             time: moment.now(),
             name: name,
             url: url,
             message: message,
-            loadTime: loadTime
+            requestTime: requestTime
         };
 
         let fileName = `log/${level}/${moment().format('YYYY-WW')}.json`;
@@ -21,17 +21,17 @@ const log = {
         });
     },
 
-    info: (name, url, message, loadTime) => {
-        log._log('info', name, url, message, loadTime);
-        console.log(`${moment().format('HH:mm:s')}: ${message}`);
+    info: (name, url, message, requestTime) => {
+        log._log('info', name, url, message, requestTime);
+        console.log(`${moment().format('HH:mm:s')}: <${name}> ${message}`);
     },
 
-    error: (name, url, message, loadTime) => {
+    error: (name, url, message, requestTime) => {
         let red = '\x1b[31m',
             reset = '\x1b[0m';
 
-        log._log('error', name, url, message, loadTime);
-        console.error(`${red}${moment().format('HH:mm:s')}: ${message}${reset}`);
+        log._log('error', name, url, message, requestTime);
+        console.error(`${red}${moment().format('HH:mm:s')}: <${name}> ${message}${reset}`);
     }
 };
 
