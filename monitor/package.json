@@ -4,10 +4,13 @@
     "description": "The monitor checking the services",
     "main": "monitor.js",
     "dependencies": {
-        "axios": "^0.18.0"
+        "axios": "^0.18.0",
+        "fs": "0.0.1-security",
+        "moment": "^2.22.2"
     },
     "devDependencies": {},
     "scripts": {
+        "start": "node monitor.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "Tony Gustafsson",

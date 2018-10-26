@@ -60,7 +60,6 @@ typings/
 /**/package-lock.json
 
 startJobs.sh
-/monitor/log/*.log
-/monitor/error/*.log
-/monitor/status/*.status
+/monitor/log/**/*.json
+/monitor/status/*.json
 /server/node_modules/

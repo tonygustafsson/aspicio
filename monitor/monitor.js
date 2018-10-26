@@ -1,6 +1,7 @@
 'use strict';
 
 const axios = require('axios');
+const log = require('./inc/log');
 
 const config = require('../config.json');
 
@@ -12,18 +13,18 @@ config.services.forEach(service => {
         headers: {}
     })
         .then(response => {
-            console.log(`${service.name}: Server responded`);
+            log.info(service.name, service.url, 'Server responded', 1000);
             return response.data;
         })
         .then(body => {
             if (!body.includes(service.findString)) {
-                console.error(`${service.name}: Could not find correct string`);
+                log.error(service.name, service.url, 'Could not find correct string', 1000);
                 return;
             }
 
-            console.log(`${service.name}: Server is up!`);
+            log.info(service.name, service.url, 'Server responded with the correct content!', 1000);
         })
         .catch(error => {
-            console.error(error.message);
+            log.error(service.name, service.url, 'Could not connect!', 1000);
         });
 });
