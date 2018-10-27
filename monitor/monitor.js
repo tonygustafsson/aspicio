@@ -2,8 +2,8 @@
 
 const axios = require('axios');
 const moment = require('moment');
-const log = require('./inc/log');
 
+const db = require('./inc/db');
 const config = require('../config.json');
 
 axios.interceptors.request.use(config => {
@@ -25,16 +25,19 @@ config.services.forEach(service => {
     })
         .then(response => {
             let requestTime = response.requestEndTime - response.config.requestStartTime;
-            log.info(service.name, service.url, 'Server responded', requestTime);
+            db.log.info(service.name, service.url, 'Server responded.', requestTime);
 
             if (!response.data.includes(service.findString)) {
-                log.error(service.name, service.url, 'Could not find correct string', requestTime);
+                db.log.error(service.name, service.url, 'Could not find correct string.', requestTime);
+                db.state.save(service.name, service.url, false, requestTime);
                 return;
             }
 
-            log.info(service.name, service.url, 'Server responded with the correct content!', requestTime);
+            db.log.info(service.name, service.url, 'Server responded with the correct content!', requestTime);
+            db.state.save(service.name, service.url, true, requestTime);
         })
         .catch(error => {
-            log.error(service.name, service.url, 'Could not connect!');
+            db.log.error(service.name, service.url, `Could not connect: ${error.message}`);
+            db.state.save(service.name, service.url, false);
         });
 });

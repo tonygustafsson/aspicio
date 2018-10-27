@@ -59,7 +59,4 @@ typings/
 
 /**/package-lock.json
 
-startJobs.sh
-/monitor/log/**/*.json
-/monitor/status/*.json
-/server/node_modules/
+monitor/db.json
