@@ -25,7 +25,6 @@ config.services.forEach(service => {
     })
         .then(response => {
             let requestTime = response.requestEndTime - response.config.requestStartTime;
-            db.log.info(service.name, service.url, 'Server responded.', requestTime);
 
             if (!response.data.includes(service.findString)) {
                 let errorMsg = `Could not find correct string: ${service.findString}`;
