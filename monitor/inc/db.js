@@ -1,9 +1,10 @@
 'use strict';
 
 const moment = require('moment');
-const loki = require('lokijs');
 const path = require('path');
 
+// ----------DB SETUP-----------//
+const loki = require('lokijs');
 var dbLocation = path.resolve(__dirname, '../db.json');
 var lokiDB = new loki(dbLocation);
 var logTable = null;
@@ -21,6 +22,7 @@ lokiDB.loadDatabase({}, () => {
         stateTable = lokiDB.addCollection('state', { indices: ['name'] });
     }
 });
+// -----------------------------//
 
 let getIdFromName = name => {
     // ID is name in lowercase and numbers, spaces as - and nothng else
