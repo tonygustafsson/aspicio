@@ -30,7 +30,20 @@ let saveState = (name, url, state, requestTime = 0) => {
     };
 
     if (stateTable) {
-        stateTable.insert(stateObj);
+        let server = stateTable.findObject({
+            name: name
+        });
+
+        if (server) {
+            server.time = stateObj.time;
+            server.url = stateObj.url;
+            server.state = stateObj.state;
+            server.requestTime = stateObj.requestTime;
+
+            stateTable.update(server);
+        } else {
+            stateTable.insert(stateObj);
+        }
     } else {
         console.error('Could not insert state!', stateObj);
     }
