@@ -28,8 +28,10 @@ config.services.forEach(service => {
             db.log.info(service.name, service.url, 'Server responded.', requestTime);
 
             if (!response.data.includes(service.findString)) {
-                db.log.error(service.name, service.url, 'Could not find correct string.', requestTime);
-                db.state.save(service.name, service.url, false, requestTime);
+                let errorMsg = `Could not find correct string: ${service.findString}`;
+
+                db.log.error(service.name, service.url, errorMsg, requestTime);
+                db.state.save(service.name, service.url, false, requestTime, errorMsg);
                 return;
             }
 
@@ -37,7 +39,9 @@ config.services.forEach(service => {
             db.state.save(service.name, service.url, true, requestTime);
         })
         .catch(error => {
-            db.log.error(service.name, service.url, `Could not connect: ${error.message}`);
-            db.state.save(service.name, service.url, false);
+            let errorMsg = `Could not connect: ${error.message}`;
+
+            db.log.error(service.name, service.url, errorMsg);
+            db.state.save(service.name, service.url, false, 0, errorMsg);
         });
 });

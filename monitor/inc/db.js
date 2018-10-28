@@ -31,14 +31,15 @@ let getIdFromName = name => {
     return name;
 };
 
-let saveState = (name, url, state, requestTime = 0) => {
-    let stateObj = {
+let saveState = (name, url, serverIsUp, requestTime = 0, error = '') => {
+    let newState = {
         name: name,
         id: getIdFromName(name),
         time: moment.now(),
         url: url,
-        state: state,
-        requestTime: requestTime
+        serverIsUp: serverIsUp,
+        requestTime: requestTime,
+        error: error
     };
 
     if (stateTable) {
@@ -47,17 +48,17 @@ let saveState = (name, url, state, requestTime = 0) => {
         });
 
         if (server) {
-            server.time = stateObj.time;
-            server.url = stateObj.url;
-            server.state = stateObj.state;
-            server.requestTime = stateObj.requestTime;
+            server.time = newState.time;
+            server.serverIsUp = newState.serverIsUp;
+            server.requestTime = newState.requestTime;
+            server.error = newState.error;
 
             stateTable.update(server);
         } else {
-            stateTable.insert(stateObj);
+            stateTable.insert(newState);
         }
     } else {
-        console.error('Could not insert state!', stateObj);
+        console.error('Could not insert state!', newState);
     }
 
     lokiDB.saveDatabase(function(err) {
@@ -66,7 +67,7 @@ let saveState = (name, url, state, requestTime = 0) => {
 };
 
 let saveLog = (level = 'info', name, url, message, requestTime = 0) => {
-    let logObj = {
+    let newLog = {
         level: level,
         time: moment.now(),
         name: name,
@@ -76,9 +77,9 @@ let saveLog = (level = 'info', name, url, message, requestTime = 0) => {
     };
 
     if (logTable) {
-        logTable.insert(logObj);
+        logTable.insert(newLog);
     } else {
-        console.error('Could not insert log!', logObj);
+        console.error('Could not insert log!', newLog);
     }
 
     lokiDB.saveDatabase(function(err) {
@@ -88,8 +89,8 @@ let saveLog = (level = 'info', name, url, message, requestTime = 0) => {
 
 const db = {
     state: {
-        save: (name, url, state, requestTime) => {
-            saveState(name, url, state, requestTime);
+        save: (name, url, state, requestTime, error) => {
+            saveState(name, url, state, requestTime, error);
         }
     },
 
