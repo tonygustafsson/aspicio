@@ -4,8 +4,10 @@
     "description": "A web monitor for watching servers",
     "main": "server.js",
     "dependencies": {
-        "express": "^4.15.3",
-        "fs": "^0.0.1-security"
+        "express": "^4.16.4",
+        "fs": "^0.0.1-security",
+        "lokijs": "^1.5.5",
+        "path": "^0.12.7"
     },
     "devDependencies": {},
     "scripts": {

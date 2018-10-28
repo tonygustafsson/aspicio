@@ -1,37 +1,44 @@
 const express = require('express');
 const app = express();
 const fs = require('fs');
+const path = require('path');
 
-app.get('/', function(req, res) {
-    res.sendFile('/home/pi/webmonitor/server/shell.html');
-});
+// ----------DB SETUP-----------//
+const loki = require('lokijs');
+var dbLocation = path.resolve(__dirname, '../db.json');
+var lokiDB = new loki(dbLocation);
+var logTable = null;
+var stateTable = null;
 
-app.get('/assets/style.css', function(req, res) {
-    res.sendFile('/home/pi/webmonitor/server/assets/style.css');
-});
+lokiDB.loadDatabase({}, () => {
+    logTable = lokiDB.getCollection('log');
+    stateTable = lokiDB.getCollection('state');
 
-app.get('/assets/serverCheck.js', function(req, res) {
-    res.sendFile('/home/pi/webmonitor/server/assets/serverCheck.js');
+    if (logTable === null) {
+        logTable = lokiDB.addCollection('log', { indices: ['level', 'time'] });
+    }
+
+    if (stateTable === null) {
+        stateTable = lokiDB.addCollection('state', { indices: ['name'] });
+    }
 });
+// -----------------------------//
 
 app.get('/get-status', function(req, res) {
-    fs.readdir('/home/pi/webmonitor/status', function(err, files) {
-        var statuses = [];
-
-        files.forEach(function(file) {
-            var fileNameInfo = file.replace('.status', '').split('_');
-
-            var status = {
-                name: fileNameInfo[0],
-                status: fileNameInfo[1],
-                responseTime: fileNameInfo[2] !== '' ? fileNameInfo[2] : '?'
-            };
-
-            statuses.push(status);
-        });
-
-        res.send(JSON.stringify(statuses));
+    let onlineServices = stateTable.find({
+        serverIsUp: { $eq: true }
     });
+
+    let offlineServices = stateTable.find({
+        serverIsUp: { $eq: false }
+    });
+
+    let response = {
+        onlineServices,
+        offlineServices
+    };
+
+    res.send(JSON.stringify(response));
 });
 
 app.get('/get-error', function(req, res) {
