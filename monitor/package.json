@@ -6,7 +6,8 @@
     "dependencies": {
         "axios": "^0.18.0",
         "lokijs": "^1.5.5",
-        "moment": "^2.22.2"
+        "moment": "^2.22.2",
+        "path": "^0.12.7"
     },
     "devDependencies": {},
     "scripts": {

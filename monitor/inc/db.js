@@ -2,8 +2,10 @@
 
 const moment = require('moment');
 const loki = require('lokijs');
+const path = require('path');
 
-var lokiDB = new loki('./db.json');
+var dbLocation = path.resolve(__dirname, '../db.json');
+var lokiDB = new loki(dbLocation);
 var logTable = null;
 var stateTable = null;
 
@@ -20,10 +22,20 @@ lokiDB.loadDatabase({}, () => {
     }
 });
 
+let getIdFromName = name => {
+    // ID is name in lowercase and numbers, spaces as - and nothng else
+    name = name.toLowerCase();
+    name = name.replace(/\s/g, '-');
+    name = name.replace(/[^a-z\d\-]/g, '', name);
+
+    return name;
+};
+
 let saveState = (name, url, state, requestTime = 0) => {
     let stateObj = {
-        time: moment.now(),
         name: name,
+        id: getIdFromName(name),
+        time: moment.now(),
         url: url,
         state: state,
         requestTime: requestTime
