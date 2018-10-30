@@ -3,7 +3,7 @@
 const axios = require('axios');
 const moment = require('moment');
 
-const db = require('./inc/db');
+const db = require('./db');
 const config = require('../config.json');
 
 axios.interceptors.request.use(config => {

@@ -5,8 +5,8 @@ const path = require('path');
 
 // ----------DB SETUP-----------//
 const loki = require('lokijs');
-var dbLocation = path.resolve(__dirname, '../db.json');
-var lokiDB = new loki(dbLocation);
+const dbLocation = path.resolve(__dirname, '../db.json');
+const lokiDB = new loki(dbLocation);
 var logTable = null;
 var stateTable = null;
 
