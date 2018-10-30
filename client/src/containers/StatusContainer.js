@@ -13,9 +13,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     dispatch(itemsFetchData('http://localhost:3001/get-status'));
 
-    return {
-        fetchData: () => dispatch(itemsFetchData('http://localhost:3001/get-status'))
-    };
+    return {};
 };
 
 export default connect(

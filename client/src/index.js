@@ -6,7 +6,13 @@ import configureStore from './store/configureStore';
 import MyComponent from './components/MyComponent';
 import StatusContainer from './containers/StatusContainer';
 
-const store = configureStore();
+const initialState = {
+    isLoading: true,
+    hasError: false,
+    items: []
+};
+
+const store = configureStore(initialState);
 
 render(
     <Provider store={store}>

@@ -32,11 +32,12 @@ export function itemsFetchData(url) {
                     throw Error(response.statusText);
                 }
 
-                dispatch(itemsAreLoading(false));
-
                 return response;
             })
-            .then(response => dispatch(itemsFetchDataSuccess(response.data)))
+            .then(response => {
+                dispatch(itemsFetchDataSuccess(response.data));
+                dispatch(itemsAreLoading(false));
+            })
             .catch(() => dispatch(itemsHaveError(true)));
     };
 }
