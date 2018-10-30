@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import apiReducer from './apiReducer';
+import { items, itemsHaveError, itemsAreLoading } from './status';
 
-const reducers = combineReducers({
-    api: apiReducer
+export default combineReducers({
+    items,
+    itemsHaveError,
+    itemsAreLoading
 });
-
-export default reducers;

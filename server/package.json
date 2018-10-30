@@ -4,6 +4,7 @@
     "description": "A web monitor for watching servers",
     "main": "server.js",
     "dependencies": {
+        "cors": "^2.8.4",
         "express": "^4.16.4",
         "lokijs": "^1.5.5",
         "path": "^0.12.7"
