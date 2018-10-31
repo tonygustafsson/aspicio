@@ -64,7 +64,7 @@ let getErrors = async () => {
                     .find({
                         level: 'error'
                     })
-                    .simplesort('time')
+                    .simplesort('time', true)
                     .limit(config.dbNoErrorsToGet)
                     .data();
 
