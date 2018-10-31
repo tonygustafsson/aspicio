@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import Services from '../components/Services';
-import { itemsFetchData } from '../actions';
 
 const mapStateToProps = state => {
     return {
@@ -11,8 +10,6 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-    dispatch(itemsFetchData());
-
     return {};
 };
 
