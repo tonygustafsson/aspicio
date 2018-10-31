@@ -2,7 +2,9 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
-import StatusContainer from './containers/StatusContainer';
+import OnlineServicesContainer from './containers/OnlineServicesContainer';
+import OfflineServicesContainer from './containers/OfflineServicesContainer';
+import ErrorsContainer from './containers/ErrorsContainer';
 
 const initialState = {
     isLoading: true,
@@ -15,7 +17,9 @@ const store = configureStore(initialState);
 render(
     <Provider store={store}>
         <div>
-            <StatusContainer />
+            <OfflineServicesContainer />
+            <OnlineServicesContainer />
+            <ErrorsContainer />
         </div>
     </Provider>,
     document.getElementById('app')

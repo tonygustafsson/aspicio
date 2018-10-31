@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
-import Status from '../components/Status';
+import Services from '../components/Services';
 import { itemsFetchData } from '../actions';
 
 const mapStateToProps = state => {
     return {
-        data: state.data,
-        hasError: state.itemsHaveError,
-        isLoading: state.itemsAreLoading
+        services: state.data && state.data.status && state.data.status.online ? state.data.status.online : [],
+        isLoading: state.itemsAreLoading,
+        heading: 'Online services'
     };
 };
 
@@ -19,4 +19,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Status);
+)(Services);
