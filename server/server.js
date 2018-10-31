@@ -5,12 +5,13 @@ const http = require('http');
 const socket = require('socket.io');
 app.use(cors());
 
+const config = require('../config.json');
 const server = http.createServer(app);
 const io = socket(server);
 
 const path = require('path');
 const loki = require('lokijs');
-const dbLocation = path.resolve(__dirname, '../db.json');
+const dbLocation = path.resolve(__dirname, `../${config.dbName}`);
 const lokiDB = new loki(dbLocation);
 
 let prevData = {},
@@ -21,10 +22,10 @@ let getStatus = async () => {
     return new Promise((resolve, reject) => {
         try {
             lokiDB.loadDatabase({}, () => {
-                var stateTable = lokiDB.getCollection('state');
+                var stateTable = lokiDB.getCollection(config.dbStateTableName);
 
                 if (stateTable === null) {
-                    stateTable = lokiDB.addCollection('state', { indices: ['name'] });
+                    stateTable = lokiDB.addCollection(config.dbStateTableName, { indices: ['name'] });
                 }
 
                 let onlineServices = stateTable.find({
@@ -52,10 +53,10 @@ let getErrors = async () => {
     return new Promise((resolve, reject) => {
         try {
             lokiDB.loadDatabase({}, () => {
-                var logTable = lokiDB.getCollection('log');
+                var logTable = lokiDB.getCollection(config.dbLogTableName);
 
                 if (logTable === null) {
-                    logTable = lokiDB.addCollection('log', { indices: ['level', 'time'] });
+                    logTable = lokiDB.addCollection(config.dbLogTableName, { indices: ['level', 'time'] });
                 }
 
                 let errors = logTable
@@ -64,7 +65,7 @@ let getErrors = async () => {
                         level: 'error'
                     })
                     .simplesort('time')
-                    .limit(25)
+                    .limit(config.dbNoErrorsToGet)
                     .data();
 
                 resolve(errors);
@@ -102,6 +103,6 @@ setInterval(async () => {
     console.log('Data has changed, emit to clients...');
     io.sockets.emit('NewData', data);
     prevData = data;
-}, 1000);
+}, config.serverCheckForChangesMs);
 
-io.listen(3001);
+io.listen(config.serverPort);

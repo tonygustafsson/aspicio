@@ -2,24 +2,25 @@
 
 const moment = require('moment');
 const path = require('path');
+const config = require('../config.json');
 
 // ----------DB SETUP-----------//
 const loki = require('lokijs');
-const dbLocation = path.resolve(__dirname, '../db.json');
+const dbLocation = path.resolve(__dirname, `../${config.dbName}`);
 const lokiDB = new loki(dbLocation);
 var logTable = null;
 var stateTable = null;
 
 lokiDB.loadDatabase({}, () => {
-    logTable = lokiDB.getCollection('log');
-    stateTable = lokiDB.getCollection('state');
+    logTable = lokiDB.getCollection(config.dbLogTableName);
+    stateTable = lokiDB.getCollection(config.dbStateTableName);
 
     if (logTable === null) {
-        logTable = lokiDB.addCollection('log', { indices: ['level', 'time'] });
+        logTable = lokiDB.addCollection(config.dbLogTableName, { indices: ['level', 'time'] });
     }
 
     if (stateTable === null) {
-        stateTable = lokiDB.addCollection('state', { indices: ['name'] });
+        stateTable = lokiDB.addCollection(config.dbStateTableName, { indices: ['name'] });
     }
 });
 // -----------------------------//

@@ -10,5 +10,11 @@
             "url": "https://www.whatismyip.com/ip-address-lookup/",
             "findString": "UA-4975660-1"
         }
-    ]
+    ],
+    "dbName": "db.json",
+    "dbLogTableName": "log",
+    "dbStateTableName": "state",
+    "dbNoErrorsToGet": 25,
+    "serverPort": 3001,
+    "serverCheckForChangesMs": 1000
 }
