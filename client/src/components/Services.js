@@ -48,7 +48,7 @@ const Services = ({ heading, services, isLoading, classes }) => {
                     <GridListTile key={service.id}>
                         <img src="img/server.png" alt={service.name} />
                         <GridListTileBar
-                            title={service.name}
+                            title={service.name + ' (' + service.requestTime + 'ms)'}
                             subtitle={<span>{moment(service.time).format('LLLL')}</span>}
                             actionIcon={
                                 <IconButton className={classes.icon}>
