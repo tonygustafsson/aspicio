@@ -7,7 +7,7 @@ import StatusContainer from './containers/StatusContainer';
 const initialState = {
     isLoading: true,
     hasError: false,
-    items: []
+    data: []
 };
 
 const store = configureStore(initialState);

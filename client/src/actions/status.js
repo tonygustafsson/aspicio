@@ -1,4 +1,7 @@
-import axios from 'axios';
+import socketIOClient from 'socket.io-client';
+
+const apiUrl = 'http://localhost:3001/';
+const socket = socketIOClient(apiUrl);
 
 export function itemsHaveError(bool) {
     return {
@@ -14,30 +17,21 @@ export function itemsAreLoading(bool) {
     };
 }
 
-export function itemsFetchDataSuccess(items) {
+export function itemsFetchDataSuccess(data) {
     return {
         type: 'ITEMS_FETCH_DATA_SUCCESS',
-        items
+        data
     };
 }
 
-export function itemsFetchData(url) {
+export function itemsFetchData() {
     return dispatch => {
         dispatch(itemsAreLoading(true));
 
-        axios
-            .get(url)
-            .then(response => {
-                if (response.status !== 200) {
-                    throw Error(response.statusText);
-                }
-
-                return response;
-            })
-            .then(response => {
-                dispatch(itemsFetchDataSuccess(response.data));
-                dispatch(itemsAreLoading(false));
-            })
-            .catch(() => dispatch(itemsHaveError(true)));
+        socket.on('NewData', data => {
+            dispatch(itemsAreLoading(true));
+            dispatch(itemsFetchDataSuccess(data));
+            dispatch(itemsAreLoading(false));
+        });
     };
 }

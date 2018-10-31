@@ -29,7 +29,11 @@ const styles = theme => ({
     }
 });
 
-const Status = ({ items, hasError, isLoading, classes }) => {
+const Status = ({ data, hasError, isLoading, classes }) => {
+    let onlineServices = data && data.status && data.status.online ? data.status.online : [],
+        offlineServices = data && data.status && data.status.online ? data.status.offline : [],
+        errors = data && data.errors ? data.errors : [];
+
     if (hasError) {
         return <p>Sorry! There was an error loading the items.</p>;
     }
@@ -38,31 +42,66 @@ const Status = ({ items, hasError, isLoading, classes }) => {
         return <p>Loading...</p>;
     }
 
-    if (!items.onlineServices) {
-        return <p>No online services.</p>;
-    }
-
     return (
         <div className={classes.root}>
-            <GridList cellHeight={180} className={classes.gridList}>
-                <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-                    <ListSubheader component="div">Services</ListSubheader>
-                </GridListTile>
-                {items.onlineServices.map(service => (
-                    <GridListTile key={service.id}>
-                        <img src="img/server.png" alt={service.name} />
-                        <GridListTileBar
-                            title={service.name}
-                            subtitle={<span>{moment(service.time).format('LLLL')}</span>}
-                            actionIcon={
-                                <IconButton className={classes.icon}>
-                                    <InfoIcon />
-                                </IconButton>
-                            }
-                        />
-                    </GridListTile>
-                ))}
-            </GridList>
+            {onlineServices &&
+                onlineServices.length > 0 && (
+                    <GridList cellHeight={180} className={classes.gridList}>
+                        <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
+                            <ListSubheader component="div">Online Services</ListSubheader>
+                        </GridListTile>
+                        {onlineServices.map(service => (
+                            <GridListTile key={service.id}>
+                                <img src="img/server.png" alt={service.name} />
+                                <GridListTileBar
+                                    title={service.name}
+                                    subtitle={<span>{moment(service.time).format('LLLL')}</span>}
+                                    actionIcon={
+                                        <IconButton className={classes.icon}>
+                                            <InfoIcon />
+                                        </IconButton>
+                                    }
+                                />
+                            </GridListTile>
+                        ))}
+                    </GridList>
+                )}
+
+            {offlineServices &&
+                offlineServices.length > 0 && (
+                    <GridList cellHeight={180} className={classes.gridList}>
+                        <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
+                            <ListSubheader component="div">Online Services</ListSubheader>
+                        </GridListTile>
+                        {offlineServices.map(service => (
+                            <GridListTile key={service.id}>
+                                <img src="img/server.png" alt={service.name} />
+                                <GridListTileBar
+                                    title={service.name}
+                                    subtitle={<span>{moment(service.time).format('LLLL')}</span>}
+                                    actionIcon={
+                                        <IconButton className={classes.icon}>
+                                            <InfoIcon />
+                                        </IconButton>
+                                    }
+                                />
+                            </GridListTile>
+                        ))}
+                    </GridList>
+                )}
+
+            {errors &&
+                errors.length > 0 && (
+                    <table>
+                        {errors.map(error => (
+                            <tr>
+                                <td>
+                                    {moment(error.time).format('LLLL')}: {error.message}
+                                </td>
+                            </tr>
+                        ))}
+                    </table>
+                )}
         </div>
     );
 };

@@ -4,14 +4,14 @@ import { itemsFetchData } from '../actions';
 
 const mapStateToProps = state => {
     return {
-        items: state.items,
+        data: state.data,
         hasError: state.itemsHaveError,
         isLoading: state.itemsAreLoading
     };
 };
 
 const mapDispatchToProps = dispatch => {
-    dispatch(itemsFetchData('http://localhost:3001/get-status'));
+    dispatch(itemsFetchData());
 
     return {};
 };
