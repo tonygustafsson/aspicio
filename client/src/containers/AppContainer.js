@@ -1,6 +1,6 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { itemsFetchData } from '../actions';
+import App from '../components/App';
 
 const mapStateToProps = state => {
     return {};
@@ -12,11 +12,7 @@ const mapDispatchToProps = dispatch => {
     return {};
 };
 
-const Component = () => {
-    return <div />;
-};
-
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Component);
+)(App);
