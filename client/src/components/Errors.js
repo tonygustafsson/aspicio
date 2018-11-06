@@ -1,31 +1,11 @@
 import React from 'react';
 import moment from 'moment';
-import { withStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import { Table } from 'reactstrap';
 
 let locale = require('moment/locale/sv');
 moment.locale('sv', locale);
 
-const styles = theme => ({
-    root: {
-        width: '100%',
-        marginTop: theme.spacing.unit * 3,
-        overflowX: 'auto'
-    },
-    table: {
-        minWidth: 700
-    },
-    td: {
-        textAlign: 'left'
-    }
-});
-
-const Errors = ({ errors, isLoading, classes }) => {
+const Errors = ({ errors, isLoading }) => {
     if (!errors) {
         return <p>Yeay, no errors!</p>;
     }
@@ -35,33 +15,29 @@ const Errors = ({ errors, isLoading, classes }) => {
     }
 
     return (
-        <Paper className={classes.root}>
-            <Table className={classes.table}>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Time</TableCell>
-                        <TableCell>Service</TableCell>
-                        <TableCell>URL</TableCell>
-                        <TableCell>Message</TableCell>
-                        <TableCell>RequestTime (ms)</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {errors.map(error => {
-                        return (
-                            <TableRow key={error.id}>
-                                <TableCell className={classes.td}>{moment(error.time).format('LLLL')}</TableCell>
-                                <TableCell className={classes.td}>{error.name}</TableCell>
-                                <TableCell className={classes.td}>{error.url}</TableCell>
-                                <TableCell className={classes.td}>{error.message}</TableCell>
-                                <TableCell className={classes.td}>{error.requestTime}</TableCell>
-                            </TableRow>
-                        );
-                    })}
-                </TableBody>
+        <div className="col-md-10 offset-md-1">
+            <Table>
+                <tr>
+                    <td>Time</td>
+                    <td>Service</td>
+                    <td>URL</td>
+                    <td>Message</td>
+                    <td>RequestTime (ms)</td>
+                </tr>
+                {errors.map(error => {
+                    return (
+                        <tr key={error.id}>
+                            <td>{moment(error.time).format('LLLL')}</td>
+                            <td>{error.name}</td>
+                            <td>{error.url}</td>
+                            <td>{error.message}</td>
+                            <td>{error.requestTime}</td>
+                        </tr>
+                    );
+                })}
             </Table>
-        </Paper>
+        </div>
     );
 };
 
-export default withStyles(styles)(Errors);
+export default Errors;
