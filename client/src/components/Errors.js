@@ -3,7 +3,7 @@ import moment from 'moment';
 import { Table } from 'reactstrap';
 
 let locale = require('moment/locale/sv');
-moment.locale('sv', locale);
+moment.updateLocale('sv', locale);
 
 const Errors = ({ errors, isLoading }) => {
     if (!errors) {
@@ -17,24 +17,28 @@ const Errors = ({ errors, isLoading }) => {
     return (
         <div className="col-md-10 offset-md-1">
             <Table>
-                <tr>
-                    <td>Time</td>
-                    <td>Service</td>
-                    <td>URL</td>
-                    <td>Message</td>
-                    <td>RequestTime (ms)</td>
-                </tr>
-                {errors.map(error => {
-                    return (
-                        <tr key={error.id}>
-                            <td>{moment(error.time).format('LLLL')}</td>
-                            <td>{error.name}</td>
-                            <td>{error.url}</td>
-                            <td>{error.message}</td>
-                            <td>{error.requestTime}</td>
-                        </tr>
-                    );
-                })}
+                <thead>
+                    <tr>
+                        <td>Time</td>
+                        <td>Service</td>
+                        <td>URL</td>
+                        <td>Message</td>
+                        <td>RequestTime (ms)</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {errors.map(error => {
+                        return (
+                            <tr key={error.time + Math.random()}>
+                                <td>{moment(error.time).format('LLLL')}</td>
+                                <td>{error.name}</td>
+                                <td>{error.url}</td>
+                                <td>{error.message}</td>
+                                <td>{error.requestTime}</td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
             </Table>
         </div>
     );
