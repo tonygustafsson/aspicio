@@ -25,7 +25,7 @@ const ServiceItem = ({ service, modalIsOpen, toggleModal }) => {
                 <CardBody>
                     <CardTitle>{service.name + ' (' + service.requestTime + 'ms)'}</CardTitle>
                     <CardSubtitle>{moment(service.time).format('LLLL')}</CardSubtitle>
-                    <CardText>Yada yada yada yada.</CardText>
+                    <CardText>{service.description}</CardText>
                     <Button onClick={toggleModal}>More info</Button>
                 </CardBody>
             </Card>
@@ -33,13 +33,9 @@ const ServiceItem = ({ service, modalIsOpen, toggleModal }) => {
             <Modal isOpen={modalIsOpen} toggle={toggleModal}>
                 <ModalHeader toggle={toggleModal}>{service.name}</ModalHeader>
                 <ModalBody>
+                    <p>{service.description}</p>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat.
-                    </p>
-                    <p>
-                        URL: <a href="{ßervice.url}">{service.url}</a>
+                        URL: <a href="{service.url}">{service.url}</a>
                         <br />
                         Request time: {service.requestTime} ms
                         <br />

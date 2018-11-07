@@ -36,6 +36,22 @@ let getStatus = async () => {
                     serverIsUp: false
                 });
 
+                onlineServices.forEach(service => {
+                    var configService = config.services.find(confService => {
+                        return confService.name === service.name;
+                    });
+
+                    service.description = configService.description;
+                });
+
+                offlineServices.forEach(service => {
+                    var configService = config.services.find(confService => {
+                        return confService.name === service.name;
+                    });
+
+                    service.description = configService.description;
+                });
+
                 let status = {
                     online: onlineServices,
                     offline: offlineServices
