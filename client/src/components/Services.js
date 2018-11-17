@@ -2,8 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import ServiceItemContainer from '../containers/ServiceItemContainer';
 import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import ListSubheader from '@material-ui/core/ListSubheader';
+import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import withRoot from '../withRoot';
 
@@ -21,11 +20,11 @@ const Services = ({ services, isLoading, heading }) => {
 
     return (
         <Paper>
-            <GridList cellHeight={180}>
-                <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-                    <ListSubheader component="div">{heading}</ListSubheader>
-                </GridListTile>
+            <Typography component="h1" variant="h4" gutterBottom>
+                {heading}
+            </Typography>
 
+            <GridList cellHeight={180}>
                 {services.map(service => (
                     <ServiceItemContainer key={service.id} service={service} modalIsOpen={false} />
                 ))}

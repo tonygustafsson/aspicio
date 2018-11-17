@@ -10,11 +10,18 @@ import withRoot from '../withRoot';
 let locale = require('moment/locale/sv');
 moment.updateLocale('sv', locale);
 
+let getTileStyle = serviceId => {
+    return {
+        background: `url("img/services/${serviceId}.svg") no-repeat`,
+        backgroundSize: '50% 50%',
+        backgroundPosition: 'center 25%'
+    };
+};
+
 const ServiceItem = ({ service, modalIsOpen, toggleModal }) => {
     return (
         <>
-            <GridListTile key={service.id}>
-                <img src="img/server.png" alt={service.name} />
+            <GridListTile key={service.id} style={getTileStyle(service.id)}>
                 <GridListTileBar
                     title={service.name + ' (' + service.requestTime + 'ms)'}
                     subtitle={<span>{moment(service.time).format('LLLL')}</span>}

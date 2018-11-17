@@ -31,7 +31,14 @@ const theme = createMuiTheme({
             root: {
                 width: '20%',
                 padding: '10px',
-                height: '400px'
+                margin: '10px',
+                height: '350px',
+                border: `1px ${grey[300]} solid`
+            }
+        },
+        MuiTypography: {
+            root: {
+                padding: '0.5em 1em'
             }
         }
     }
