@@ -1,7 +1,4 @@
-import socketIOClient from 'socket.io-client';
-
-const apiUrl = 'http://localhost:3001/';
-const socket = socketIOClient(apiUrl);
+import socketContext from '../socketContext';
 
 export function itemsHaveError(bool) {
     return {
@@ -28,7 +25,7 @@ export function itemsFetchData() {
     return dispatch => {
         dispatch(itemsAreLoading(true));
 
-        socket.on('NewData', data => {
+        socketContext.on('NewData', data => {
             dispatch(itemsAreLoading(true));
             dispatch(itemsFetchDataSuccess(data));
             dispatch(itemsAreLoading(false));

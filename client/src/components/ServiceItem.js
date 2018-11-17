@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import ServiceItemDialog from './ServiceItemDialog';
+import ServiceItemDialogContainer from '../containers/ServiceItemDialogContainer';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
@@ -33,7 +33,7 @@ const ServiceItem = ({ service, modalIsOpen, toggleModal }) => {
                 />
             </GridListTile>
 
-            <ServiceItemDialog service={service} modalIsOpen={modalIsOpen} toggleModal={toggleModal} />
+            <ServiceItemDialogContainer service={service} modalIsOpen={modalIsOpen} toggleModal={toggleModal} />
         </>
     );
 };

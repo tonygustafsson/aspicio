@@ -102,6 +102,21 @@ io.on('connection', async socket => {
 
     socket.emit('NewData', data);
 
+    socket.on('ToggleService', data => {
+        console.log('ToggleService: ' + data.serviceId);
+
+        /*
+        let data = {
+            status: await getStatus(),
+            errors: await getErrors()
+        };
+       
+        io.sockets.emit('NewData', data);
+
+        prevData = data;
+        */
+    });
+
     socket.on('disconnect', () => console.log(`Client disconnected with ID ${socket.id}`));
 });
 
