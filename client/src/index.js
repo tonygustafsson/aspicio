@@ -5,8 +5,8 @@ import configureStore from './store/configureStore';
 import AppContainer from './containers/AppContainer';
 
 const initialState = {
-    isLoading: true,
-    hasError: false,
+    itemsAreLoading: true,
+    itemsHaveError: false,
     data: []
 };
 

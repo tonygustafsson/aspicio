@@ -35,7 +35,7 @@ const Errors = ({ errors, isLoading }) => {
                 <TableBody>
                     {errors.map(error => {
                         return (
-                            <TableRow key={error.id}>
+                            <TableRow key={error.time + Math.random()}>
                                 <TableCell>{moment(error.time).format('LLLL')}</TableCell>
                                 <TableCell>{error.name}</TableCell>
                                 <TableCell>{error.url}</TableCell>
