@@ -1,11 +1,16 @@
 import React from 'react';
 import moment from 'moment';
 import ServiceItemContainer from '../containers/ServiceItemContainer';
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import Paper from '@material-ui/core/Paper';
+import withRoot from '../withRoot';
 
 let locale = require('moment/locale/sv');
 moment.updateLocale('sv', locale);
 
-const Services = ({ services, isLoading }) => {
+const Services = ({ services, isLoading, heading }) => {
     if (isLoading) {
         return <p>Loading...</p>;
     }
@@ -15,14 +20,18 @@ const Services = ({ services, isLoading }) => {
     }
 
     return (
-        <div className="container pt-5 pb-5">
-            <div className="row">
+        <Paper>
+            <GridList cellHeight={180}>
+                <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
+                    <ListSubheader component="div">{heading}</ListSubheader>
+                </GridListTile>
+
                 {services.map(service => (
                     <ServiceItemContainer key={service.id} service={service} modalIsOpen={false} />
                 ))}
-            </div>
-        </div>
+            </GridList>
+        </Paper>
     );
 };
 
-export default Services;
+export default withRoot(Services);

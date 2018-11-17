@@ -1,6 +1,12 @@
 import React from 'react';
 import moment from 'moment';
-import { Table } from 'reactstrap';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import withRoot from '../withRoot';
 
 let locale = require('moment/locale/sv');
 moment.updateLocale('sv', locale);
@@ -15,33 +21,33 @@ const Errors = ({ errors, isLoading }) => {
     }
 
     return (
-        <div className="col-md-10 offset-md-1">
+        <Paper>
             <Table>
-                <thead>
-                    <tr>
-                        <td>Time</td>
-                        <td>Service</td>
-                        <td>URL</td>
-                        <td>Message</td>
-                        <td>RequestTime (ms)</td>
-                    </tr>
-                </thead>
-                <tbody>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Time</TableCell>
+                        <TableCell>Service</TableCell>
+                        <TableCell>URL</TableCell>
+                        <TableCell>Message</TableCell>
+                        <TableCell>RequestTime (ms)</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
                     {errors.map(error => {
                         return (
-                            <tr key={error.time + Math.random()}>
-                                <td>{moment(error.time).format('LLLL')}</td>
-                                <td>{error.name}</td>
-                                <td>{error.url}</td>
-                                <td>{error.message}</td>
-                                <td>{error.requestTime}</td>
-                            </tr>
+                            <TableRow key={error.id}>
+                                <TableCell>{moment(error.time).format('LLLL')}</TableCell>
+                                <TableCell>{error.name}</TableCell>
+                                <TableCell>{error.url}</TableCell>
+                                <TableCell>{error.message}</TableCell>
+                                <TableCell>{error.requestTime}</TableCell>
+                            </TableRow>
                         );
                     })}
-                </tbody>
+                </TableBody>
             </Table>
-        </div>
+        </Paper>
     );
 };
 
-export default Errors;
+export default withRoot(Errors);

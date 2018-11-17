@@ -1,58 +1,59 @@
 import React from 'react';
 import moment from 'moment';
-import {
-    Button,
-    Modal,
-    ModalHeader,
-    ModalBody,
-    ModalFooter,
-    Card,
-    CardImg,
-    CardText,
-    CardBody,
-    CardTitle,
-    CardSubtitle
-} from 'reactstrap';
+import GridListTile from '@material-ui/core/GridListTile';
+import GridListTileBar from '@material-ui/core/GridListTileBar';
+import IconButton from '@material-ui/core/IconButton';
+import InfoIcon from '@material-ui/icons/Info';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import withRoot from '../withRoot';
 
 let locale = require('moment/locale/sv');
 moment.updateLocale('sv', locale);
 
 const ServiceItem = ({ service, modalIsOpen, toggleModal }) => {
     return (
-        <div className="col-3">
-            <Card>
-                <CardImg top width="100%" src="img/server.png" />
-                <CardBody>
-                    <CardTitle>{service.name + ' (' + service.requestTime + 'ms)'}</CardTitle>
-                    <CardSubtitle>{moment(service.time).format('LLLL')}</CardSubtitle>
-                    <CardText>{service.description}</CardText>
-                    <Button onClick={toggleModal}>More info</Button>
-                </CardBody>
-            </Card>
+        <>
+            <GridListTile key={service.id}>
+                <img src="img/server.png" alt={service.name} />
+                <GridListTileBar
+                    title={service.name + ' (' + service.requestTime + 'ms)'}
+                    subtitle={<span>{moment(service.time).format('LLLL')}</span>}
+                    actionIcon={
+                        <IconButton onClick={toggleModal}>
+                            <InfoIcon />
+                        </IconButton>
+                    }
+                />
+            </GridListTile>
 
-            <Modal isOpen={modalIsOpen} toggle={toggleModal}>
-                <ModalHeader toggle={toggleModal}>{service.name}</ModalHeader>
-                <ModalBody>
-                    <p>{service.description}</p>
-                    <p>
+            <Dialog open={modalIsOpen} onClose={toggleModal}>
+                <DialogTitle>{service.name}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">{service.description}</DialogContentText>
+                    <DialogContentText>
                         URL: <a href="{service.url}">{service.url}</a>
                         <br />
                         Request time: {service.requestTime} ms
                         <br />
                         {service.error && <span>Last error: {service.error}</span>}
-                    </p>
-                </ModalBody>
-                <ModalFooter>
-                    <Button color="danger" onClick={toggleModal}>
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={toggleModal} color="secondary">
                         Pause service
-                    </Button>{' '}
-                    <Button color="secondary" onClick={toggleModal}>
-                        Close
                     </Button>
-                </ModalFooter>
-            </Modal>
-        </div>
+                    <Button onClick={toggleModal} color="primary" autoFocus>
+                        Agree
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        </>
     );
 };
 
-export default ServiceItem;
+export default withRoot(ServiceItem);
