@@ -15,7 +15,19 @@ let getTileStyle = service => {
         background: `url("img/services/${service.id}.svg") no-repeat`,
         backgroundSize: '50% 50%',
         backgroundPosition: 'center 25%',
-        opacity: service.enabled ? 1 : 0.5
+        opacity: service.enabled ? 1 : 0.75
+    };
+};
+
+let getgridListTileBarStyle = service => {
+    let yellow = 'rgba(180, 185, 70, 0.7)',
+        green = 'rgba(60, 150, 0, 0.7)',
+        red = 'rgba(150, 0, 0, 0.7)';
+
+    if (!service.enabled) return { backgroundColor: yellow };
+
+    return {
+        backgroundColor: service.serverIsUp ? green : red
     };
 };
 
@@ -26,6 +38,7 @@ const ServiceItem = ({ service, modalIsOpen, toggleModal }) => {
                 <GridListTileBar
                     title={service.name + ' (' + service.requestTime + 'ms)'}
                     subtitle={<span>{moment(service.time).format('LLLL')}</span>}
+                    style={getgridListTileBarStyle(service)}
                     actionIcon={
                         <IconButton onClick={toggleModal}>
                             <InfoIcon />
