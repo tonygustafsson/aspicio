@@ -21,14 +21,10 @@ export function itemsFetchDataSuccess(data) {
     };
 }
 
-export function itemsFetchData() {
+export function listenForNewData() {
     return dispatch => {
-        dispatch(itemsAreLoading(true));
-
         socketContext.on('NewData', data => {
-            dispatch(itemsAreLoading(true));
             dispatch(itemsFetchDataSuccess(data));
-            dispatch(itemsAreLoading(false));
         });
     };
 }

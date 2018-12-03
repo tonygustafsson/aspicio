@@ -117,22 +117,11 @@ io.on('connection', async socket => {
             return confService.name === data.serviceId;
         });
 
-        console.log('ToggleServiceState: ' + configService.name);
-
         configService.enabled = !configService.enabled;
-
         saveConfig(config);
 
-        /*
-        let data = {
-            status: await getStatus(),
-            errors: await getErrors()
-        };
-       
-        io.sockets.emit('NewData', data);
-
-        prevData = data;
-        */
+        console.log('ToggleServiceState: ' + configService.name);
+        socket.emit('ToggleServiceStateSuccess', data.serviceId);
     });
 
     socket.on('disconnect', () => console.log(`Client disconnected with ID ${socket.id}`));

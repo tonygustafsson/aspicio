@@ -7,6 +7,14 @@ export function toggleServiceState(serviceId) {
     };
 }
 
+export function listenForServiceStateResponse() {
+    return dispatch => {
+        socketContext.on('ToggleServiceStateSuccess', serviceId => {
+            dispatch(toggleServiceState(serviceId));
+        });
+    };
+}
+
 export function sendServiceState(serviceId) {
     return dispatch => {
         socketContext.emit('ToggleServiceState', { serviceId: serviceId }, response => {

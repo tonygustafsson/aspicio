@@ -6,7 +6,7 @@ import AppContainer from './containers/AppContainer';
 import * as serviceWorker from './serviceWorker';
 
 const initialState = {
-    itemsAreLoading: true,
+    itemsAreLoading: false,
     itemsHaveError: false,
     data: []
 };
