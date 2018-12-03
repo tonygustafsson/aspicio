@@ -1,17 +1,17 @@
 import socketContext from '../socketContext';
 
-export function toggleService(serviceId) {
+export function toggleServiceState(serviceId) {
     return {
-        type: 'TOGGLE_SERVICE',
+        type: 'TOGGLE_SERVICE_STATE',
         serviceId: serviceId
     };
 }
 
-export function pushToggleService(serviceId) {
+export function sendServiceState(serviceId) {
     return dispatch => {
-        socketContext.emit('ToggleService', { serviceId: serviceId }, response => {
+        socketContext.emit('ToggleServiceState', { serviceId: serviceId }, response => {
             console.log('Svar: ' + response);
-            dispatch(toggleService(serviceId));
+            dispatch(toggleServiceState(serviceId));
         });
     };
 }

@@ -18,6 +18,8 @@ axios.interceptors.response.use(response => {
 });
 
 config.services.forEach(service => {
+    if (!service.enabled) return;
+
     axios({
         method: 'get',
         url: service.url,

@@ -11,7 +11,7 @@ import withRoot from '../withRoot';
 let locale = require('moment/locale/sv');
 moment.updateLocale('sv', locale);
 
-const ServiceItemDialog = ({ service, modalIsOpen, toggleModal, pushToggleService }) => {
+const ServiceItemDialog = ({ service, modalIsOpen, toggleModal, toggleServiceState }) => {
     return (
         <Dialog open={modalIsOpen} onClose={toggleModal}>
             <DialogTitle>{service.name}</DialogTitle>
@@ -24,12 +24,16 @@ const ServiceItemDialog = ({ service, modalIsOpen, toggleModal, pushToggleServic
                     <br />
                     Last checked: {moment(service.time).format('LLLL')}
                     <br />
+                    {service.enabled && <span>Enabled: YES</span>}
+                    {!service.enabled && <span>Enabled: NO</span>}
+                    <br />
                     {service.error && <span>Last error: {service.error}</span>}
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button onClick={() => pushToggleService(service.id)} color="secondary">
-                    Pause service
+                <Button onClick={() => toggleServiceState(service.name)} color="secondary">
+                    {service.enabled && <span>Pause service</span>}
+                    {!service.enabled && <span>Start service</span>}
                 </Button>
                 <Button onClick={toggleModal} color="primary" autoFocus>
                     Close

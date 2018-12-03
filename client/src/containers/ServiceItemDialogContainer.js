@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import ServiceItemDialog from '../components/ServiceItemDialog';
-import { pushToggleService } from '../actions';
+import { sendServiceState } from '../actions';
 
 const mapStateToProps = state => {
     return {};
@@ -8,8 +8,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        pushToggleService: serviceId => {
-            dispatch(pushToggleService(serviceId));
+        toggleServiceState: serviceId => {
+            dispatch(sendServiceState(serviceId));
         }
     };
 };

@@ -5,10 +5,12 @@ const http = require('http');
 const socket = require('socket.io');
 app.use(cors());
 
-const config = require('../config.json');
+const configPath = '../config.json';
+let config = require(configPath);
 const server = http.createServer(app);
 const io = socket(server);
 
+const fs = require('fs');
 const path = require('path');
 const loki = require('lokijs');
 const dbLocation = path.resolve(__dirname, `../${config.dbName}`);
@@ -42,6 +44,7 @@ let getStatus = async () => {
                     });
 
                     service.description = configService.description;
+                    service.enabled = configService.enabled;
                 });
 
                 offlineServices.forEach(service => {
@@ -50,6 +53,7 @@ let getStatus = async () => {
                     });
 
                     service.description = configService.description;
+                    service.enabled = configService.enabled;
                 });
 
                 let status = {
@@ -92,6 +96,12 @@ let getErrors = async () => {
     });
 };
 
+let saveConfig = config => {
+    fs.writeFile(configPath, JSON.stringify(config, null, 4), 'utf8', () => {
+        config = config;
+    });
+};
+
 io.on('connection', async socket => {
     console.log(`New client connected with ID ${socket.id}`);
 
@@ -102,8 +112,16 @@ io.on('connection', async socket => {
 
     socket.emit('NewData', data);
 
-    socket.on('ToggleService', data => {
-        console.log('ToggleService: ' + data.serviceId);
+    socket.on('ToggleServiceState', data => {
+        var configService = config.services.find(confService => {
+            return confService.name === data.serviceId;
+        });
+
+        console.log('ToggleServiceState: ' + configService.name);
+
+        configService.enabled = !configService.enabled;
+
+        saveConfig(config);
 
         /*
         let data = {

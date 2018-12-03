@@ -1,6 +1,6 @@
-export function toggleService(state = false, action) {
+export function toggleServiceState(state = false, action) {
     switch (action.type) {
-        case 'TOGGLE_SERVICE':
+        case 'TOGGLE_SERVICE_STATE':
             return action.serviceId;
 
         default:
