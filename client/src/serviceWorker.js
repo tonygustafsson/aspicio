@@ -64,7 +64,8 @@ export function register(config) {
 
                                 if (serversOffline > 0) {
                                     swReg.showNotification('Offline services!', {
-                                        body: `${serversOffline} servers offline.`
+                                        body: `${serversOffline} servers offline.`,
+                                        icon: '/img/favicon/favicon-32x32.png'
                                     });
                                 }
                             });

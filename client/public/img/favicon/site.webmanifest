@@ -1,6 +1,6 @@
 {
+    "name": "Aspicio",
     "short_name": "Aspicio",
-    "name": "Aspicio Monitor",
     "icons": [
         {
             "src": "/img/favicon/android-chrome-192x192.png",
@@ -13,8 +13,7 @@
             "type": "image/png"
         }
     ],
-    "start_url": ".",
-    "display": "standalone",
     "theme_color": "#9dcfe3",
-    "background_color": "#9dcfe3"
+    "background_color": "#9dcfe3",
+    "display": "standalone"
 }
