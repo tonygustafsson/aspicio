@@ -1,19 +1,24 @@
 # aspicio
 
-A curl web monitor and a nodejs web server to show server up/down.
-It used bash and curl for checking the web pages, both that it delivers HTTP 200 (OK) and that the correct content is recieved.
-It also have a nodejs express web server that will show a dashboard with all the webpages statuses.
+A NodeJS / React web monitor that alerts operators when services are down.
 
-monitor/startJobs.sh is using monitor/webCheck.sh to check servers with curl. This is scheduled with a cron job.
+It has three parts:
 
-Oh, and it has Slack support. It shouts out to a #channel when servers are down.
-For this to work you need to edit webCheck.sh.
+-   Monitor: Checks services through axios HTTP/HTTPS and saves state to DB using LokiDB.
+-   Server: NodeJS web server that goes through the database and sends alerts with web sockets to client.
+-   Client: A React with Redux that recieves updates from the server.
+
+Oh, and it has Slack support. It shouts out to a #channel when servers are down as well.
+And it's a Progressive Web App, which means that operators can get alerts in their mobile devices.
+It's also equipped to be used as a dashboard on a TV or tablet somewhere.
+
+It works on Linux, MacOS and Windows.
+
+![Aspicio map](aspicio.png 'Aspicio map')
 
 ## Dependencies
 
--   Linux (bash)
 -   NodeJS
--   npm
 
 ## Setup repository
 
@@ -21,30 +26,42 @@ For this to work you need to edit webCheck.sh.
 git clone https://github.com/tonygustafsson/aspicio.git
 ```
 
-## Setup nodejs packages
+## Start web monitor
+
+```
+cd monitor
+npm install
+npm start
+```
+
+## Start web server
 
 ```
 cd server
 npm install
+npm start
 ```
 
-## Setup scheduled jobs
+## Start web client
 
 ```
-crontab -e
+cd client
+npm install
+npm start
 ```
 
-And add the following:
+## Configuration
 
-```
-*/2 * * * * ~/Projects/aspicio/monitor/startJobs.sh
-@reboot nodejs ~/Projects/aspicio/server/server.js
-```
+All configuration is done in ./config.json. Including:
 
-## Directories
+-   The LokiDB filename, tables and indexes
+-   The services to monitor with ports and addresses
+-   Port that is used by server and client
+-   Number of errors seen on client
+-   Slack integration
+-   How often stuff is done
 
--   /monitor: The curl monitor
--   /server: The nodejs server is stored here
--   /server/error: Everytime a webpages it not responding it will be logged here
--   /server/log: All webpage checkups are logged here, even HTTP 200 (OK)
--   /server/status: The server up/down status and response time is stored in file names that the nodejs server can scan
+## TODO
+
+-   A scheduling for monitor
+-   Separation for server and client so that client works from another network if needed
