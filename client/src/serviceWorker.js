@@ -1,14 +1,22 @@
-// This optional code is used to register a service worker.
-// register() is not called by default.
+import socketIOClient from 'socket.io-client';
+const apiUrl = 'http://localhost:3001/';
 
-// This lets the app load faster on subsequent visits in production, and gives
-// it offline capabilities. However, it also means that developers (and users)
-// will only see deployed updates on subsequent visits to a page, after all the
-// existing tabs open on the page have been closed, since previously cached
-// resources are updated in the background.
+function urlBase64ToUint8Array(base64String) {
+    var padding = '='.repeat((4 - (base64String.length % 4)) % 4);
+    var base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
 
-// To learn more about the benefits of this model and instructions on how to
-// opt-in, read http://bit.ly/CRA-PWA
+    var rawData = window.atob(base64);
+    var outputArray = new Uint8Array(rawData.length);
+
+    for (var i = 0; i < rawData.length; ++i) {
+        outputArray[i] = rawData.charCodeAt(i);
+    }
+    return outputArray;
+}
+
+const applicationServerPublicKey =
+    'BKXEquBlxD_1vF79Jx2NxQb0ASLIfjYl2BIInGrjjYn2U-FNB0XQHZnUJXNZR5mgoVtVuAqgUjK2BR5UD7r8q_s';
+const applicationServerKey = urlBase64ToUint8Array(applicationServerPublicKey);
 
 const isLocalhost = Boolean(
     window.location.hostname === 'localhost' ||
@@ -23,9 +31,6 @@ export function register(config) {
         // The URL constructor is available in all browsers that support SW.
         const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
         if (publicUrl.origin !== window.location.origin) {
-            // Our service worker won't work if PUBLIC_URL is on a different origin
-            // from what our page is served on. This might happen if a CDN is used to
-            // serve assets; see https://github.com/facebook/create-react-app/issues/2374
             return;
         }
 
@@ -38,7 +43,34 @@ export function register(config) {
 
                 // Add some additional logging to localhost, pointing developers to the
                 // service worker/PWA documentation.
-                navigator.serviceWorker.ready.then(() => {
+                navigator.serviceWorker.ready.then(swReg => {
+                    if ('PushManager' in window) {
+                        swReg.pushManager
+                            .subscribe({
+                                userVisibleOnly: true,
+                                applicationServerKey: applicationServerKey
+                            })
+                            .then(_ => {
+                                console.log('User is subscribed');
+                            });
+
+                        swReg.pushManager.getSubscription().then(sub => {
+                            if (sub !== null) return;
+
+                            let socket = socketIOClient(apiUrl);
+
+                            socket.on('NewData', data => {
+                                let serversOffline = data.status.offline.length || 0;
+
+                                if (serversOffline > 0) {
+                                    swReg.showNotification('Offline services!', {
+                                        body: `${serversOffline} servers offline.`
+                                    });
+                                }
+                            });
+                        });
+                    }
+
                     console.log(
                         'This web app is being served cache-first by a service ' +
                             'worker. To learn more, visit http://bit.ly/CRA-PWA'
