@@ -1,5 +1,5 @@
 {
-    "name": "webmonitor-client",
+    "name": "aspicio-client",
     "version": "0.1.0",
     "private": true,
     "dependencies": {

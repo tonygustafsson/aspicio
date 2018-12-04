@@ -1,4 +1,4 @@
-# webmonitor
+# aspicio
 
 A curl web monitor and a nodejs web server to show server up/down.
 It used bash and curl for checking the web pages, both that it delivers HTTP 200 (OK) and that the correct content is recieved.
@@ -18,7 +18,7 @@ For this to work you need to edit webCheck.sh.
 ## Setup repository
 
 ```
-git clone https://github.com/tonygustafsson/webmonitor.git
+git clone https://github.com/tonygustafsson/aspicio.git
 ```
 
 ## Setup nodejs packages
@@ -37,8 +37,8 @@ crontab -e
 And add the following:
 
 ```
-*/2 * * * * ~/Projects/webmonitor/monitor/startJobs.sh
-@reboot nodejs ~/Projects/webmonitor/server/server.js
+*/2 * * * * ~/Projects/aspicio/monitor/startJobs.sh
+@reboot nodejs ~/Projects/aspicio/server/server.js
 ```
 
 ## Directories

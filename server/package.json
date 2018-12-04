@@ -1,7 +1,7 @@
 {
-    "name": "webmonitor",
+    "name": "aspicio-server",
     "version": "1.0.0",
-    "description": "A web monitor for watching servers",
+    "description": "A web monitor for watching services",
     "main": "server.js",
     "dependencies": {
         "cors": "^2.8.4",

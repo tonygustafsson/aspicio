@@ -1,5 +1,5 @@
 {
-    "name": "webmonitor-monitor",
+    "name": "aspicio-monitor",
     "version": "1.0.0",
     "description": "The monitor checking the services",
     "main": "monitor.js",
