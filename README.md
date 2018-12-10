@@ -50,6 +50,12 @@ npm install
 npm start
 ```
 
+## Authenticate
+
+There is not yet a real way of authentication, but you will have to authenticate anyways. :P
+Change the constant in ./client/src/constants/token.js. To be able to view the client you'll
+need to add a localStorage item named AspicioToken with this token in it.
+
 ## Configuration
 
 All configuration is done in ./config.json. Including:
