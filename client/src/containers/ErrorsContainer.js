@@ -3,8 +3,7 @@ import Errors from '../components/Errors';
 
 const mapStateToProps = state => {
     return {
-        errors: state.data.errors,
-        isLoading: state.itemsAreLoading
+        errors: state.data.errors
     };
 };
 

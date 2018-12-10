@@ -4,7 +4,6 @@ import Services from '../components/Services';
 const mapStateToProps = state => {
     return {
         services: state.data && state.data.status && state.data.status.offline ? state.data.status.offline : [],
-        isLoading: state.itemsAreLoading,
         heading: 'Offline services'
     };
 };

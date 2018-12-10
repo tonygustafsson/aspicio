@@ -12,13 +12,9 @@ import withRoot from '../withRoot';
 let locale = require('moment/locale/sv');
 moment.updateLocale('sv', locale);
 
-const Errors = ({ errors, isLoading }) => {
+const Errors = ({ errors }) => {
     if (!errors) {
-        return <p>Yeay, no errors!</p>;
-    }
-
-    if (isLoading) {
-        return <p>Loading...</p>;
+        return <div />;
     }
 
     return (

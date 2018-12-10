@@ -9,11 +9,7 @@ import withRoot from '../withRoot';
 let locale = require('moment/locale/sv');
 moment.updateLocale('sv', locale);
 
-const Services = ({ services, isLoading, heading }) => {
-    if (isLoading) {
-        return <p>Loading...</p>;
-    }
-
+const Services = ({ services, heading }) => {
     if (!services || services.length < 1) {
         return <div />;
     }

@@ -3,7 +3,8 @@ import Connectivity from '../components/Connectivity';
 
 const mapStateToProps = state => {
     return {
-        isOnline: state.isOnline
+        isOnline: state.isOnline,
+        services: state.data && state.data.status ? state.data.status : []
     };
 };
 
