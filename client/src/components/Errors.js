@@ -12,8 +12,8 @@ import withRoot from '../withRoot';
 let locale = require('moment/locale/sv');
 moment.updateLocale('sv', locale);
 
-const Errors = ({ errors }) => {
-    if (!errors) {
+const Errors = ({ isAuthenticated, errors }) => {
+    if (!isAuthenticated || !errors) {
         return <div />;
     }
 

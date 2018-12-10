@@ -6,6 +6,7 @@ import AppContainer from './containers/AppContainer';
 import * as serviceWorker from './serviceWorker';
 
 const initialState = {
+    isAuthenticated: false,
     isOnline: true,
     data: []
 };

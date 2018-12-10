@@ -1,5 +1,11 @@
 import { connect } from 'react-redux';
-import { listenForNewData, listenForServiceStateResponse, listenToWindowEvent, navigatorOnLine } from '../actions';
+import {
+    listenForNewData,
+    listenForServiceStateResponse,
+    listenToWindowEvent,
+    navigatorOnLine,
+    isAuthenticated
+} from '../actions';
 import App from '../components/App';
 
 const mapStateToProps = state => {
@@ -7,6 +13,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
+    dispatch(isAuthenticated());
+
     dispatch(listenForNewData());
     dispatch(listenForServiceStateResponse());
 

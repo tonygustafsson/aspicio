@@ -23,7 +23,15 @@ const textOfflineStyle = {
     textShadow: '0 0 20px rgba(0, 0, 0, 0.75)'
 };
 
-const Connectivity = ({ isOnline, services }) => {
+const Connectivity = ({ isAuthenticated, isOnline, services }) => {
+    if (!isAuthenticated) {
+        return (
+            <div style={offlineModalStyle}>
+                <strong style={textOfflineStyle}>Not authenticated.</strong>
+            </div>
+        );
+    }
+
     if (!isOnline) {
         return (
             <div style={offlineModalStyle}>

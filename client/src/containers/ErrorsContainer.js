@@ -3,6 +3,7 @@ import Errors from '../components/Errors';
 
 const mapStateToProps = state => {
     return {
+        isAuthenticated: state.isAuthenticated,
         errors: state.data.errors
     };
 };
