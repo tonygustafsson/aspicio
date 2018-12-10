@@ -6,12 +6,3 @@ export function toggleServiceState(state = false, action) {
             return state;
     }
 }
-
-export function isOnline(state = false, action) {
-    switch (action.type) {
-        case 'NAVIGATOR_CONNECTIVITY':
-            return action.payload;
-        default:
-            return state;
-    }
-}
