@@ -23,16 +23,24 @@ const textOfflineStyle = {
     textShadow: '0 0 20px rgba(0, 0, 0, 0.75)'
 };
 
-const Connectivity = ({ isOnline }) => {
-    if (isOnline) {
-        return <div />;
+const Connectivity = ({ isOnline, services }) => {
+    if (!isOnline) {
+        return (
+            <div style={offlineModalStyle}>
+                <strong style={textOfflineStyle}>Client is offline.</strong>
+            </div>
+        );
     }
 
-    return (
-        <div style={offlineModalStyle}>
-            <strong style={textOfflineStyle}>Client is offline.</strong>
-        </div>
-    );
+    if ((!services.offline || services.offline.length < 1) && (!services.online || services.online.length < 1)) {
+        return (
+            <div style={offlineModalStyle}>
+                <strong style={textOfflineStyle}>Server is silent. Waiting...</strong>
+            </div>
+        );
+    }
+
+    return <div />;
 };
 
 export default withRoot(Connectivity);
