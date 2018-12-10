@@ -18,8 +18,22 @@ export function listenForServiceStateResponse() {
 export function sendServiceState(serviceId) {
     return dispatch => {
         socketContext.emit('ToggleServiceState', { serviceId: serviceId }, response => {
-            console.log('Svar: ' + response);
             dispatch(toggleServiceState(serviceId));
+        });
+    };
+}
+
+export function navigatorOnLine(e) {
+    return {
+        type: 'NAVIGATOR_CONNECTIVITY',
+        payload: navigator.onLine
+    };
+}
+
+export function listenToWindowEvent(name, mapEventToAction) {
+    return dispatch => {
+        window.addEventListener(name, e => {
+            dispatch(mapEventToAction(e));
         });
     };
 }
