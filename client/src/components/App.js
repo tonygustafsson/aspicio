@@ -1,5 +1,6 @@
 import React from 'react';
 
+import HeaderContainer from '../containers/HeaderContainer';
 import OnlineServicesContainer from '../containers/OnlineServicesContainer';
 import OfflineServicesContainer from '../containers/OfflineServicesContainer';
 import ErrorsContainer from '../containers/ErrorsContainer';
@@ -9,6 +10,7 @@ import Grid from '@material-ui/core/Grid';
 const App = () => {
     return (
         <Grid container spacing={16}>
+            <HeaderContainer />
             <ConnectivityContainer />
             <OfflineServicesContainer />
             <OnlineServicesContainer />

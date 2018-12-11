@@ -23,8 +23,8 @@ const theme = createMuiTheme({
     overrides: {
         MuiPaper: {
             root: {
-                width: '80%',
-                margin: '20px 10%'
+                width: '90%',
+                margin: '20px 5%'
             }
         },
         MuiGridListTile: {
