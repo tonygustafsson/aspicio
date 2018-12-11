@@ -1,5 +1,6 @@
 import React from 'react';
 import withRoot from '../withRoot';
+const constants = require('../constants');
 
 const offlineModalStyle = {
     position: 'absolute',
@@ -19,36 +20,64 @@ const textOfflineStyle = {
     width: '100%',
     fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
     textTransform: 'uppercase',
+    userSelect: 'none',
     fontSize: '5vw',
     textShadow: '0 0 20px rgba(0, 0, 0, 0.75)'
 };
 
-const Connectivity = ({ isAuthenticated, isOnline, services }) => {
-    if (!isAuthenticated) {
-        return (
-            <div style={offlineModalStyle}>
-                <strong style={textOfflineStyle}>Not authenticated.</strong>
-            </div>
-        );
+class Connectivity extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isAuthenticated: props.isAuthenticated,
+            noOfClicks: 0
+        };
+
+        this.clickEvent = this.clickEvent.bind(this);
     }
 
-    if (!isOnline) {
-        return (
-            <div style={offlineModalStyle}>
-                <strong style={textOfflineStyle}>Client is offline.</strong>
-            </div>
-        );
+    clickEvent() {
+        this.setState({
+            noOfClicks: this.state.noOfClicks + 1
+        });
+
+        if (this.state.noOfClicks > 50) {
+            window.localStorage.setItem(constants.TOKEN.authTokenName, constants.TOKEN.authToken);
+            window.location.reload();
+        }
     }
 
-    if ((!services.offline || services.offline.length < 1) && (!services.online || services.online.length < 1)) {
-        return (
-            <div style={offlineModalStyle}>
-                <strong style={textOfflineStyle}>Server is silent. Waiting...</strong>
-            </div>
-        );
-    }
+    render() {
+        if (!this.props.isAuthenticated) {
+            return (
+                <div style={offlineModalStyle} onClick={this.clickEvent}>
+                    <strong style={textOfflineStyle}>Not authenticated.</strong>
+                </div>
+            );
+        }
 
-    return <div />;
-};
+        if (!this.props.isOnline) {
+            return (
+                <div style={offlineModalStyle}>
+                    <strong style={textOfflineStyle}>Client is offline.</strong>
+                </div>
+            );
+        }
+
+        if (
+            (!this.props.services.offline || this.props.services.offline.length < 1) &&
+            (!this.props.services.online || this.props.services.online.length < 1)
+        ) {
+            return (
+                <div style={offlineModalStyle}>
+                    <strong style={textOfflineStyle}>Server is silent. Waiting...</strong>
+                </div>
+            );
+        }
+
+        return <div />;
+    }
+}
 
 export default withRoot(Connectivity);
