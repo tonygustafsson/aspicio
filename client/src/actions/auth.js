@@ -9,9 +9,9 @@ export function authenticatedUser(status) {
 
 export function isAuthenticated() {
     return dispatch => {
-        var authToken = window.localStorage.getItem('AspicioToken');
+        var authToken = window.localStorage.getItem(constants.TOKEN.authTokenName);
 
-        if (authToken && authToken === constants.TOKEN.auth) {
+        if (authToken && authToken === constants.TOKEN.authToken) {
             dispatch(authenticatedUser(true));
         } else {
             dispatch(authenticatedUser(false));

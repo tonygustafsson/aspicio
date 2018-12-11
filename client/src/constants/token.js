@@ -1,3 +1,4 @@
 export const TOKEN = {
-    auth: 'aqsSkdfBo6XU67m6!'
+    authTokenName: 'AspicioToken',
+    authToken: 'aqsSkdfBo6XU67m6!'
 };
