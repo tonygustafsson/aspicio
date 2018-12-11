@@ -6,18 +6,23 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
 import withRoot from '../withRoot';
+import { withTheme } from '@material-ui/core/styles';
 
 let locale = require('moment/locale/sv');
 moment.updateLocale('sv', locale);
 
-let getTileStyle = service => {
-    return {
+let getTileStyle = (service, theme) => ({
+    root: {
+        width: 'calc(100% - 20px)',
         background: `url("img/services/${service.id}.svg") no-repeat`,
         backgroundSize: '50% 50%',
         backgroundPosition: 'center 25%',
-        opacity: service.enabled ? 1 : 0.75
-    };
-};
+        opacity: service.enabled ? 1 : 0.75,
+        [theme.breakpoints.up('md')]: {
+            width: 'calc(20% - 20px)'
+        }
+    }
+});
 
 let getgridListTileBarStyle = service => {
     let yellow = 'rgba(180, 185, 70, 0.7)',
@@ -31,10 +36,10 @@ let getgridListTileBarStyle = service => {
     };
 };
 
-const ServiceItem = ({ service, modalIsOpen, toggleModal }) => {
+const ServiceItem = ({ service, modalIsOpen, toggleModal, theme }) => {
     return (
         <>
-            <GridListTile key={service.id} style={getTileStyle(service)}>
+            <GridListTile key={service.id} style={getTileStyle(service, theme)}>
                 <GridListTileBar
                     title={service.name + ' (' + service.requestTime + 'ms)'}
                     subtitle={<span>{moment(service.time).format('LLLL')}</span>}
@@ -52,4 +57,4 @@ const ServiceItem = ({ service, modalIsOpen, toggleModal }) => {
     );
 };
 
-export default withRoot(ServiceItem);
+export default withRoot(withTheme()(ServiceItem));
