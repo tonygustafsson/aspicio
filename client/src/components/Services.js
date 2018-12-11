@@ -4,6 +4,7 @@ import ServiceItemContainer from '../containers/ServiceItemContainer';
 import GridList from '@material-ui/core/GridList';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 import withRoot from '../withRoot';
 
 let locale = require('moment/locale/sv');
@@ -15,17 +16,19 @@ const Services = ({ isAuthenticated, services, heading }) => {
     }
 
     return (
-        <Paper>
-            <Typography component="h1" variant="h4" gutterBottom>
-                {heading}
-            </Typography>
+        <Grid container>
+            <Paper>
+                <Typography component="h1" variant="h4" gutterBottom>
+                    {heading}
+                </Typography>
 
-            <GridList cellHeight={180}>
-                {services.map(service => (
-                    <ServiceItemContainer key={service.id} service={service} modalIsOpen={false} />
-                ))}
-            </GridList>
-        </Paper>
+                <GridList cellHeight={180}>
+                    {services.map(service => (
+                        <ServiceItemContainer key={service.id} service={service} modalIsOpen={false} />
+                    ))}
+                </GridList>
+            </Paper>
+        </Grid>
     );
 };
 
