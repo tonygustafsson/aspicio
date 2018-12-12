@@ -8,12 +8,13 @@ import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
 import withRoot from '../withRoot';
 import { withTheme } from '@material-ui/core/styles';
-import green from '@material-ui/core/colors/green';
-import red from '@material-ui/core/colors/red';
-import orange from '@material-ui/core/colors/orange';
 
 let locale = require('moment/locale/sv');
 moment.updateLocale('sv', locale);
+
+const green = 'rgb(30, 74, 32)';
+const red = 'rgb(128, 18, 18)';
+const yellow = 'rgb(148, 127, 27)';
 
 let getTileStyle = (service, theme) => {
     return {
@@ -27,10 +28,10 @@ let getTileStyle = (service, theme) => {
 };
 
 let getgridListTileBarStyle = service => {
-    if (!service.enabled) return { backgroundColor: orange[700] };
+    if (!service.enabled) return { backgroundColor: yellow };
 
     return {
-        backgroundColor: service.serverIsUp ? green[700] : red[700]
+        backgroundColor: service.serverIsUp ? green : red
     };
 };
 

@@ -6,12 +6,13 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import LanguageIcon from '@material-ui/icons/Language';
 import FullSceenIcon from '@material-ui/icons/Fullscreen';
-import green from '@material-ui/core/colors/green';
-import red from '@material-ui/core/colors/red';
+
+const green = 'rgb(30, 74, 32)';
+const red = 'rgb(128, 18, 18)';
 
 const appBarStyle = hasErrors => {
     return {
-        backgroundColor: hasErrors ? red[700] : green[700]
+        backgroundColor: hasErrors ? red : green
     };
 };
 
