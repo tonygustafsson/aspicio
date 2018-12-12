@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import LanguageIcon from '@material-ui/icons/Language';
 import FullSceenIcon from '@material-ui/icons/Fullscreen';
 import green from '@material-ui/core/colors/green';
 import red from '@material-ui/core/colors/red';
@@ -18,6 +18,11 @@ const appBarStyle = hasErrors => {
 const fullSceenIconStyle = {
     position: 'absolute',
     right: '20px'
+};
+
+const infoIconStyle = {
+    position: 'absolute',
+    right: '70px'
 };
 
 const goFullScreen = () => {
@@ -34,6 +39,10 @@ const goFullScreen = () => {
     }
 };
 
+const goToGithub = () => {
+    window.location.href = 'https://github.com/tonygustafsson/aspicio';
+};
+
 const Header = ({ isAuthenticated, hasErrors }) => {
     if (!isAuthenticated) {
         return <div />;
@@ -43,15 +52,20 @@ const Header = ({ isAuthenticated, hasErrors }) => {
         <Grid item xs={12}>
             <AppBar style={appBarStyle(hasErrors)} position="static">
                 <Toolbar>
-                    <IconButton color="inherit" aria-label="Menu">
-                        <MenuIcon />
-                    </IconButton>
-
                     <Typography variant="h6" color="inherit">
                         Aspicio
                     </Typography>
 
-                    <IconButton style={fullSceenIconStyle} color="inherit" aria-label="Menu">
+                    <IconButton
+                        title="Read more about Aspicio on GitHub"
+                        style={infoIconStyle}
+                        color="inherit"
+                        aria-label="Menu"
+                    >
+                        <LanguageIcon onClick={e => goToGithub()} />
+                    </IconButton>
+
+                    <IconButton title="Go fullscreen" style={fullSceenIconStyle} color="inherit" aria-label="Menu">
                         <FullSceenIcon onClick={e => goFullScreen()} />
                     </IconButton>
                 </Toolbar>
