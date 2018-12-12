@@ -34,6 +34,15 @@ npm install
 npm start
 ```
 
+## Schedule web monitor
+
+The is no real value to run this just once. You can schedule how often the monitor should run
+by changing the cron time in ./config.json. Then just run:
+
+```
+node scheduler.js
+```
+
 ## Start web server
 
 ```
@@ -52,9 +61,13 @@ npm start
 
 ## Authenticate
 
-There is not yet a real way of authentication, but you will have to authenticate anyways. :P
-Change the constant in ./client/src/constants/token.js. To be able to view the client you'll
-need to add a localStorage item named AspicioToken with this token in it.
+No real authentication exists yet. To prevent from displaying sensitive information to the wrong person,
+you can set your token which a localStorage variable must match. The token is included in the client
+source code so this is in no way secure.
+
+Change the constants in ./client/src/constants/token.js. To be able to view the client you'll
+need to add a localStorage item named AspicioToken with this token in it. Leave the token empty to
+allow all.
 
 ## Configuration
 
@@ -66,8 +79,3 @@ All configuration is done in ./config.json. Including:
 -   Number of errors seen on client
 -   Slack integration
 -   How often stuff is done
-
-## TODO
-
--   A scheduling for monitor
--   Separation for server and client so that client works from another network if needed
