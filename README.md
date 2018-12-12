@@ -14,7 +14,13 @@ It's also equipped to be used as a dashboard on a TV or tablet somewhere.
 
 It works on Linux, MacOS and Windows.
 
-![Aspicio map](aspicio.png 'Aspicio map')
+## Screenshot
+
+![Aspicio screenshot](aspicio-screenshot.png 'Aspicio screenshot')
+
+## Map
+
+![Aspicio map](aspicio-map.png 'Aspicio map')
 
 ## Dependencies
 
