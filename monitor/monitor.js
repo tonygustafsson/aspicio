@@ -34,7 +34,10 @@ config.services.forEach(service => {
 
                 db.log.error(service.name, service.url, errorMsg, requestTime);
                 db.state.save(service.name, service.url, false, requestTime, errorMsg);
-                slack.send(service, errorMsg);
+
+                if (config.slackEnabled) {
+                    slack.send(service, errorMsg);
+                }
 
                 return;
             }
@@ -47,6 +50,9 @@ config.services.forEach(service => {
 
             db.log.error(service.name, service.url, errorMsg);
             db.state.save(service.name, service.url, false, 0, errorMsg);
-            slack.send(service, errorMsg);
+
+            if (config.slackEnabled) {
+                slack.send(service, errorMsg);
+            }
         });
 });
