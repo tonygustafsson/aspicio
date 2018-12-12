@@ -71,11 +71,23 @@ allow all.
 
 ## Configuration
 
-All configuration is done in ./config.json. Including:
+All configuration is done in ./config.json.
 
--   The LokiDB filename, tables and indexes
--   The services to monitor with ports and addresses
--   Port that is used by server and client
--   Number of errors seen on client
--   Slack integration
--   How often stuff is done
+-   services: An array with service objects
+    -   name: The display name of the service
+    -   url: The URL to check against, could include a network port. HTTP and HTTPS supported.
+    -   findString: A string to look for in the HTML response to verify that the site is really up.
+    -   description: A longer description for the client
+    -   enabled: If false it will be checked and the client will show the service as paused.
+-   dbName: The JSON database name.
+-   dbLogTableName: The table name for logs, including log/warning/error. No need to change this.
+-   dbStateTableName: The table name for states for each service. No need to change this.
+-   dbNoErrosToGet: How many errors to display on the client.
+-   serverPort: The server port. The client must match this to be able to communicate.
+-   serverCheckForChangesMs: How often the server should look at the output from the monitor. It will not push to clients if no change is made so this can be low. In milliseconds.
+-   monitorCheckServices: How often the monitor will check the services, in cron format.
+-   clientUrl: The URL to the client, including port.
+-   slackEnabled: Boolean. Use Slack integration or not.
+-   slackHookUrl: The Hook URL to be able to communicate and authenticate to Slack.
+-   slackUserName: The username that is showed in Slack.
+-   slackIcon: The icon for the username that is showed in Slack.
