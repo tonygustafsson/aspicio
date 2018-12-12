@@ -6,6 +6,10 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
 import withRoot from '../withRoot';
 
 let locale = require('moment/locale/sv');
@@ -18,16 +22,41 @@ const ServiceItemDialog = ({ service, modalIsOpen, toggleModal, toggleServiceSta
             <DialogContent>
                 <DialogContentText id="alert-dialog-description">{service.description}</DialogContentText>
                 <DialogContentText>
-                    URL: <a href="{service.url}">{service.url}</a>
-                    <br />
-                    Request time: {service.requestTime} ms
-                    <br />
-                    Last checked: {moment(service.time).format('LLLL')}
-                    <br />
-                    {service.enabled && <span>Paused: No</span>}
-                    {!service.enabled && <span>Paused: Yes</span>}
-                    <br />
-                    {service.error && <span>Last error: {service.error}</span>}
+                    <Table>
+                        <TableBody>
+                            <TableRow>
+                                <TableCell>URL</TableCell>
+                                <TableCell>
+                                    <a href="{service.url}">{service.url}</a>
+                                </TableCell>
+                            </TableRow>
+
+                            <TableRow>
+                                <TableCell>Request time</TableCell>
+                                <TableCell>{service.requestTime} ms</TableCell>
+                            </TableRow>
+
+                            <TableRow>
+                                <TableCell>Last checked</TableCell>
+                                <TableCell>{moment(service.time).format('LLLL')}</TableCell>
+                            </TableRow>
+
+                            <TableRow>
+                                <TableCell>Paused</TableCell>
+                                <TableCell>
+                                    {service.enabled && <span>No</span>}
+                                    {!service.enabled && <span>Yes</span>}
+                                </TableCell>
+                            </TableRow>
+
+                            {service.error && (
+                                <TableRow>
+                                    <TableCell>Last error</TableCell>
+                                    <TableCell>{service.error}</TableCell>
+                                </TableRow>
+                            )}
+                        </TableBody>
+                    </Table>
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
