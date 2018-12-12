@@ -65,6 +65,12 @@ npm install
 npm start
 ```
 
+## Build product ready web client
+
+```
+npm run build
+```
+
 ## Authenticate
 
 No real authentication exists yet. To prevent from displaying sensitive information to the wrong person,
@@ -78,6 +84,9 @@ allow all.
 ## Configuration
 
 All configuration is done in ./config.json.
+
+Images for services on the client is in ./client/public/img/services and the name of the image have
+to be id.svg. The ID is not configurable, but is generated automatically. "Time is" becomes time-is.svg and so on.
 
 -   services: An array with service objects
     -   name: The display name of the service
