@@ -21,6 +21,7 @@
     "dbNoErrorsToGet": 25,
     "serverPort": 3001,
     "serverCheckForChangesMs": 1000,
+    "monitorCheckServices": "*/10 * * * * *",
     "clientUrl": "http://localhost:3000/",
     "slackHookUrl": "https://hooks.slack.com/services/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",
     "slackUserName": "Aspicio",
