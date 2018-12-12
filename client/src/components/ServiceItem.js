@@ -33,6 +33,10 @@ let getgridListTileBarStyle = service => {
     };
 };
 
+let getButtonStyle = {
+    color: '#fff'
+};
+
 const ServiceItem = ({ service, modalIsOpen, toggleModal, theme }) => {
     return (
         <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -43,7 +47,7 @@ const ServiceItem = ({ service, modalIsOpen, toggleModal, theme }) => {
                     style={getgridListTileBarStyle(service)}
                     actionIcon={
                         <IconButton onClick={toggleModal}>
-                            <InfoIcon />
+                            <InfoIcon style={getButtonStyle} />
                         </IconButton>
                     }
                 />

@@ -24,8 +24,8 @@ const ServiceItemDialog = ({ service, modalIsOpen, toggleModal, toggleServiceSta
                     <br />
                     Last checked: {moment(service.time).format('LLLL')}
                     <br />
-                    {service.enabled && <span>Enabled: YES</span>}
-                    {!service.enabled && <span>Enabled: NO</span>}
+                    {service.enabled && <span>Paused: No</span>}
+                    {!service.enabled && <span>Paused: Yes</span>}
                     <br />
                     {service.error && <span>Last error: {service.error}</span>}
                 </DialogContentText>
