@@ -9,7 +9,7 @@ import Grid from '@material-ui/core/Grid';
 
 const App = () => {
     return (
-        <Grid container spacing={16}>
+        <Grid container>
             <HeaderContainer />
             <ConnectivityContainer />
             <OfflineServicesContainer />
