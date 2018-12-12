@@ -21,7 +21,8 @@ let getTileStyle = (service, theme) => {
         background: `url("img/services/${service.id}.svg") no-repeat`,
         backgroundSize: '50% 50%',
         backgroundPosition: 'center 25%',
-        opacity: service.enabled ? 1 : 0.75
+        opacity: service.enabled ? 1 : 0.75,
+        cursor: 'pointer'
     };
 };
 
@@ -40,13 +41,13 @@ let getButtonStyle = {
 const ServiceItem = ({ service, modalIsOpen, toggleModal, theme }) => {
     return (
         <Grid item xs={12} sm={6} md={4} lg={3}>
-            <GridListTile key={service.id} style={getTileStyle(service, theme)}>
+            <GridListTile onClick={toggleModal} key={service.id} style={getTileStyle(service, theme)}>
                 <GridListTileBar
                     title={service.name + ' (' + service.requestTime + 'ms)'}
                     subtitle={<span>{moment(service.time).format('LLLL')}</span>}
                     style={getgridListTileBarStyle(service)}
                     actionIcon={
-                        <IconButton onClick={toggleModal}>
+                        <IconButton>
                             <InfoIcon style={getButtonStyle} />
                         </IconButton>
                     }
