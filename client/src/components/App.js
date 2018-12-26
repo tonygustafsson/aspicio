@@ -1,5 +1,6 @@
-import React from 'react';
+// @flow
 
+import React from 'react';
 import HeaderContainer from '../containers/HeaderContainer';
 import OnlineServicesContainer from '../containers/OnlineServicesContainer';
 import OfflineServicesContainer from '../containers/OfflineServicesContainer';

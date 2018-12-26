@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import moment from 'moment';
 import Grid from '@material-ui/core/Grid';

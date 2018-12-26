@@ -1,5 +1,9 @@
+// @flow
+
 import React from 'react';
 import withRoot from '../withRoot';
+import type { StatusesType } from '../types';
+
 const constants = require('../constants');
 
 const offlineModalStyle = {
@@ -25,8 +29,18 @@ const textOfflineStyle = {
     textShadow: '0 0 20px rgba(0, 0, 0, 0.75)'
 };
 
-class Connectivity extends React.Component {
-    constructor(props) {
+type PropType = {
+    isAuthenticated: boolean,
+    isOnline: boolean,
+    services: StatusesType
+};
+
+type StateType = {
+    noOfClicks: number
+};
+
+class Connectivity extends React.Component<PropType, StateType> {
+    constructor(props: PropType, state: StateType) {
         super(props);
 
         this.state = {
@@ -36,6 +50,8 @@ class Connectivity extends React.Component {
 
         this.clickEvent = this.clickEvent.bind(this);
     }
+
+    clickEvent: () => void;
 
     clickEvent() {
         this.setState({

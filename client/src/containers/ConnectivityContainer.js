@@ -1,5 +1,14 @@
+// @flow
+
 import { connect } from 'react-redux';
 import Connectivity from '../components/Connectivity';
+import type { StatusesType } from '../types';
+
+type StateType = {
+    isAuthenticated: boolean,
+    isOnline: boolean,
+    services: StatusesType
+};
 
 const mapStateToProps = state => {
     return {

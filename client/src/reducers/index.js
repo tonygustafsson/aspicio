@@ -1,3 +1,5 @@
+// @flow
+
 import { combineReducers } from 'redux';
 import { data } from './status';
 import { isOnline } from './connectivity';

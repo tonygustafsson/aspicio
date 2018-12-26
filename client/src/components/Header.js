@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -26,8 +28,10 @@ const infoIconStyle = {
     right: '70px'
 };
 
-const goFullScreen = () => {
-    var elem = document.documentElement;
+const goFullScreen = (): void => {
+    const elem: any = document.documentElement;
+
+    if (elem === null) return;
 
     if (elem.requestFullscreen) {
         elem.requestFullscreen();
@@ -36,7 +40,7 @@ const goFullScreen = () => {
     } else if (elem.mozRequestFullScreen) {
         elem.mozRequestFullScreen();
     } else if (elem.webkitRequestFullscreen) {
-        elem.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+        elem.webkitRequestFullscreen();
     }
 };
 
@@ -44,7 +48,12 @@ const goToGithub = () => {
     window.location.href = 'https://github.com/tonygustafsson/aspicio';
 };
 
-const Header = ({ isAuthenticated, hasErrors }) => {
+type HeaderType = {
+    isAuthenticated: boolean,
+    hasErrors: boolean
+};
+
+const Header = ({ isAuthenticated, hasErrors }: HeaderType) => {
     if (!isAuthenticated) {
         return <div />;
     }
@@ -57,12 +66,7 @@ const Header = ({ isAuthenticated, hasErrors }) => {
                         Aspicio
                     </Typography>
 
-                    <IconButton
-                        title="Read more about Aspicio on GitHub"
-                        style={infoIconStyle}
-                        color="inherit"
-                        aria-label="Menu"
-                    >
+                    <IconButton title="Read more about Aspicio on GitHub" style={infoIconStyle} color="inherit" aria-label="Menu">
                         <LanguageIcon onClick={e => goToGithub()} />
                     </IconButton>
 

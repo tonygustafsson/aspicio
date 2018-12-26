@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import moment from 'moment';
 import Button from '@material-ui/core/Button';

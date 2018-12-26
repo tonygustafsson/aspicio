@@ -1,6 +1,8 @@
+// @flow
+
 const constants = require('../constants');
 
-export function authenticatedUser(status) {
+export function authenticatedUser(status: boolean) {
     return {
         type: 'AUTHENTICATED_USER',
         payload: status
@@ -8,7 +10,7 @@ export function authenticatedUser(status) {
 }
 
 export function isAuthenticated() {
-    return dispatch => {
+    return (dispatch: function) => {
         var authToken = window.localStorage.getItem(constants.TOKEN.authTokenName);
 
         if (authToken && authToken === constants.TOKEN.authToken) {

@@ -1,20 +1,9 @@
+// @flow
+
 import socketContext from '../socketContext';
+import type { DataFromApiType } from '../types'
 
-export function itemsHaveError(bool) {
-    return {
-        type: 'ITEMS_HAVE_ERROR',
-        hasError: bool
-    };
-}
-
-export function itemsAreLoading(bool) {
-    return {
-        type: 'ITEMS_ARE_LOADING',
-        isLoading: bool
-    };
-}
-
-export function itemsFetchDataSuccess(data) {
+export function itemsFetchDataSuccess(data: DataFromApiType) {
     return {
         type: 'ITEMS_FETCH_DATA_SUCCESS',
         data
@@ -22,8 +11,8 @@ export function itemsFetchDataSuccess(data) {
 }
 
 export function listenForNewData() {
-    return dispatch => {
-        socketContext.on('NewData', data => {
+    return (dispatch: function) => {
+        socketContext.on('NewData', (data: DataFromApiType) => {
             dispatch(itemsFetchDataSuccess(data));
         });
     };

@@ -1,3 +1,5 @@
+// @flow
+
 import socketIOClient from 'socket.io-client';
 
 const apiUrl = 'http://localhost:3001/';

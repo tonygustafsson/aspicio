@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import moment from 'moment';
 import ServiceItemDialogContainer from '../containers/ServiceItemDialogContainer';
@@ -39,7 +41,14 @@ let getButtonStyle = {
     color: '#fff'
 };
 
-const ServiceItem = ({ service, modalIsOpen, toggleModal, theme }) => {
+type Props = {
+    service: any,
+    modalIsOpen: number,
+    toggleModal: boolean,
+    theme: any
+};
+
+const ServiceItem = ({ service, modalIsOpen, toggleModal, theme }: Props) => {
     return (
         <Grid item xs={12} sm={6} md={4} lg={3}>
             <GridListTile onClick={toggleModal} key={service.id} style={getTileStyle(service, theme)}>

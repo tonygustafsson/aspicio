@@ -1,11 +1,7 @@
+// @flow
+
 import { connect } from 'react-redux';
-import {
-    listenForNewData,
-    listenForServiceStateResponse,
-    listenToWindowEvent,
-    navigatorOnLine,
-    isAuthenticated
-} from '../actions';
+import { listenForNewData, listenForServiceStateResponse, listenToWindowEvent, navigatorOnLine, isAuthenticated } from '../actions';
 import App from '../components/App';
 
 const mapStateToProps = state => {

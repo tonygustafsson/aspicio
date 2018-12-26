@@ -1,8 +1,19 @@
+// @flow
+
 import React from 'react';
 import ServiceItem from '../components/ServiceItem';
+import type { StatusType } from '../types';
 
-class ServiceItemContainer extends React.Component {
-    constructor(props) {
+type PropType = {
+    service: StatusType
+};
+
+type StateType = {
+    modalIsOpen: boolean
+};
+
+class ServiceItemContainer extends React.Component<PropType, StateType> {
+    constructor(props: PropType, state: StateType) {
         super(props);
 
         this.state = {
@@ -12,6 +23,8 @@ class ServiceItemContainer extends React.Component {
         this.toggleModal = this.toggleModal.bind(this);
     }
 
+    toggleModal: () => void;
+
     toggleModal() {
         this.setState({
             modalIsOpen: !this.state.modalIsOpen
@@ -19,13 +32,7 @@ class ServiceItemContainer extends React.Component {
     }
 
     render() {
-        return (
-            <ServiceItem
-                service={this.props.service}
-                modalIsOpen={this.state.modalIsOpen}
-                toggleModal={this.toggleModal}
-            />
-        );
+        return <ServiceItem service={this.props.service} modalIsOpen={this.state.modalIsOpen} toggleModal={this.toggleModal} />;
     }
 }
 
