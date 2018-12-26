@@ -1,5 +1,4 @@
-import socketIOClient from 'socket.io-client';
-const apiUrl = 'http://localhost:3001/';
+import socketContext from './socketContext';
 
 function urlBase64ToUint8Array(base64String) {
     var padding = '='.repeat((4 - (base64String.length % 4)) % 4);
@@ -56,9 +55,7 @@ export function register(config) {
                         swReg.pushManager.getSubscription().then(sub => {
                             if (sub !== null) return;
 
-                            let socket = socketIOClient(apiUrl);
-
-                            socket.on('NewData', data => {
+                            socketContext.on('NewData', data => {
                                 let serversOffline = data.status.offline.length || 0;
 
                                 if (serversOffline > 0) {

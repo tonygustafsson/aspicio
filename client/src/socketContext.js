@@ -1,8 +1,6 @@
-// @flow
-
 import socketIOClient from 'socket.io-client';
 
-const apiUrl = 'http://localhost:3001/';
-const SocketContext = socketIOClient(apiUrl);
+const serverSocketUri = process.env.REACT_APP_SERVER_SOCKET_URL;
+const SocketContext = socketIOClient(serverSocketUri);
 
 export default SocketContext;

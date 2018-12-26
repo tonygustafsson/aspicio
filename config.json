@@ -23,6 +23,7 @@
     "serverCheckForChangesMs": 1000,
     "monitorCheckServices": "*/10 * * * * *",
     "clientUrl": "http://localhost:3000/",
+    "serverSocketUrl": "http://localhost:3001",
     "slackEnabled": true,
     "slackHookUrl": "https://hooks.slack.com/services/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",
     "slackUserName": "Aspicio",
