@@ -2,11 +2,17 @@
 
 import { connect } from 'react-redux';
 import Errors from '../components/Errors';
+import type { ErrorType } from '../types';
 
-const mapStateToProps = state => {
+type StateType = {
+    isAuthenticated: boolean,
+    errors: Array<ErrorType>
+};
+
+const mapStateToProps = (state: StateType) => {
     return {
         isAuthenticated: state.isAuthenticated,
-        errors: state.data.errors
+        errors: state.errors
     };
 };
 

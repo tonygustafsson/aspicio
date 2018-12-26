@@ -2,11 +2,17 @@
 
 import { connect } from 'react-redux';
 import Services from '../components/Services';
+import type { StatusesType } from '../types';
 
-const mapStateToProps = state => {
+type StateType = {
+    isAuthenticated: boolean,
+    status: StatusesType
+};
+
+const mapStateToProps = (state: StateType) => {
     return {
         isAuthenticated: state.isAuthenticated,
-        services: state.data && state.data.status && state.data.status.online ? state.data.status.online : [],
+        services: state && state.status && state.status.online ? state.status.online : [],
         heading: 'Online services'
     };
 };

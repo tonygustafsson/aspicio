@@ -26,6 +26,6 @@ export type StatusesType = {
 };
 
 export type DataFromApiType = {
-    errors?: ErrorType,
+    errors?: Array<ErrorType>,
     status?: StatusesType
 };

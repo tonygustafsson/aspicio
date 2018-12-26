@@ -1,12 +1,13 @@
 // @flow
 
 import { combineReducers } from 'redux';
-import { data } from './status';
+import { status, errors } from './status';
 import { isOnline } from './connectivity';
 import { isAuthenticated } from './auth';
 
 export default combineReducers({
-    data,
+    status,
+    errors,
     isOnline,
     isAuthenticated
 });

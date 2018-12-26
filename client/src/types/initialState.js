@@ -1,9 +1,10 @@
 // @flow
 
-import type { DataFromApiType } from '.';
+import type { StatusesType, ErrorType } from '.';
 
 export type InitialStateType = {
     isAuthenticated: boolean,
     isOnline: boolean,
-    data: DataFromApiType
+    status: StatusesType,
+    errors: Array<ErrorType>
 };

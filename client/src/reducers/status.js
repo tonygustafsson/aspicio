@@ -1,16 +1,30 @@
 // @flow
 
-import type { DataFromApiType } from '../types';
+import type { StatusesType, ErrorType } from '../types';
 
-type ActionType = {
+type ActionStatusType = {
     type: string,
-    data: DataFromApiType
+    status: StatusesType
 };
 
-export function data(state: Array<any> = [], action: ActionType) {
+type ActionErrorsType = {
+    type: string,
+    errors: Array<ErrorType>
+};
+
+export function status(state: Array<any> = [], action: ActionStatusType) {
     switch (action.type) {
         case 'ITEMS_FETCH_DATA_SUCCESS':
-            return action.data;
+            return action.status;
+        default:
+            return state;
+    }
+}
+
+export function errors(state: Array<any> = [], action: ActionErrorsType) {
+    switch (action.type) {
+        case 'ITEMS_FETCH_DATA_SUCCESS':
+            return action.errors;
 
         default:
             return state;

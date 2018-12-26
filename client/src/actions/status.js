@@ -6,7 +6,8 @@ import type { DataFromApiType } from '../types'
 export function itemsFetchDataSuccess(data: DataFromApiType) {
     return {
         type: 'ITEMS_FETCH_DATA_SUCCESS',
-        data
+        status: data.status,
+        errors: data.errors
     };
 }
 

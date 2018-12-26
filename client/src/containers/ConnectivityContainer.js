@@ -7,18 +7,18 @@ import type { StatusesType } from '../types';
 type StateType = {
     isAuthenticated: boolean,
     isOnline: boolean,
-    services: StatusesType
+    status: StatusesType
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: StateType) => {
     return {
         isAuthenticated: state.isAuthenticated,
         isOnline: state.isOnline,
-        services: state.data && state.data.status ? state.data.status : []
+        services: state && state.status ? state.status : []
     };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: function) => {
     return {};
 };
 
