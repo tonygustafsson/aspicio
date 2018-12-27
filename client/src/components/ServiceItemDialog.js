@@ -51,12 +51,12 @@ const ServiceItemDialog = ({ service, modalIsOpen, toggleModal, toggleServiceSta
                             </TableCell>
                         </TableRow>
 
-                        {service.error && (
-                            <TableRow>
-                                <TableCell>Last error</TableCell>
-                                <TableCell>{service.error}</TableCell>
-                            </TableRow>
-                        )}
+                        <TableRow>
+                            <TableCell>{service.error.length < 1 && <span />}</TableCell>
+                            <TableCell>{service.error.length < 1 && <span>No recorded errors so far.</span>}</TableCell>
+                            <TableCell>{service.error.length > 0 && <span>Last error</span>}</TableCell>
+                            <TableCell>{service.error.length > 0 && <span>service.error</span>}</TableCell>
+                        </TableRow>
                     </TableBody>
                 </Table>
             </DialogContent>

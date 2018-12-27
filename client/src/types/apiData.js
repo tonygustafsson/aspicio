@@ -17,7 +17,8 @@ export type StatusType = {
     name: string,
     serverIsUp: boolean,
     time: number,
-    url: string
+    url: string,
+    error: string
 };
 
 export type StatusesType = {
