@@ -12,6 +12,10 @@ import withRoot from '../withRoot';
 let locale = require('moment/locale/sv');
 moment.updateLocale('sv', locale);
 
+const ArePropsEqual = (prevProps, nextProps) => {
+    return JSON.stringify(prevProps.services) === JSON.stringify(nextProps.services);
+};
+
 const Services = ({ isAuthenticated, services, heading }) => {
     if (!isAuthenticated || !services || services.length < 1) {
         return <div />;
@@ -34,4 +38,4 @@ const Services = ({ isAuthenticated, services, heading }) => {
     );
 };
 
-export default withRoot(Services);
+export default withRoot(React.memo(Services, ArePropsEqual));

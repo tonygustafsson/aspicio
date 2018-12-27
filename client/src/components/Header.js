@@ -8,13 +8,15 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import LanguageIcon from '@material-ui/icons/Language';
 import FullSceenIcon from '@material-ui/icons/Fullscreen';
+import withRoot from '../withRoot';
 
 const green = 'rgb(30, 74, 32)';
 const red = 'rgb(128, 18, 18)';
 
 const appBarStyle = hasErrors => {
     return {
-        backgroundColor: hasErrors ? red : green
+        backgroundColor: hasErrors ? red : green,
+        margin: 0
     };
 };
 
@@ -53,6 +55,10 @@ type HeaderType = {
     hasErrors: boolean
 };
 
+const ArePropsEqual = (prevProps, nextProps): boolean => {
+    return prevProps.hasErrors === nextProps.hasErrors;
+};
+
 const Header = ({ isAuthenticated, hasErrors }: HeaderType) => {
     if (!isAuthenticated) {
         return <div />;
@@ -79,4 +85,4 @@ const Header = ({ isAuthenticated, hasErrors }: HeaderType) => {
     );
 };
 
-export default Header;
+export default withRoot(React.memo(Header, ArePropsEqual));

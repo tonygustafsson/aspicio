@@ -21,6 +21,10 @@ let getTableContainerStyle = service => {
     };
 };
 
+const ArePropsEqual = (prevProps, nextProps): boolean => {
+    return JSON.stringify(prevProps.errors) === JSON.stringify(nextProps.errors);
+};
+
 const Errors = ({ isAuthenticated, errors }) => {
     if (!isAuthenticated || !errors) {
         return <div />;
@@ -62,4 +66,4 @@ const Errors = ({ isAuthenticated, errors }) => {
     );
 };
 
-export default withRoot(Errors);
+export default withRoot(React.memo(Errors, ArePropsEqual));
