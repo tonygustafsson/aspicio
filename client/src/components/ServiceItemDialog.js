@@ -2,7 +2,6 @@
 
 import React from 'react';
 import moment from 'moment';
-import locale from 'moment/locale/sv';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -15,8 +14,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import withRoot from '../withRoot';
 import type { StatusType } from '../types';
-
-moment.updateLocale('sv', locale);
 
 type Props = {
     service: StatusType,

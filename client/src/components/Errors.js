@@ -2,7 +2,6 @@
 
 import React from 'react';
 import moment from 'moment';
-import locale from 'moment/locale/sv';
 import Grid from '@material-ui/core/Grid';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -12,8 +11,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withRoot from '../withRoot';
-
-moment.updateLocale('sv', locale);
 
 let getTableContainerStyle = service => {
     return {
