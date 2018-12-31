@@ -38,14 +38,14 @@ let getButtonStyle = {
     color: '#fff'
 };
 
-type Props = {
+type PropTypes = {
     service: any,
     modalIsOpen: number,
     toggleModal: boolean,
     theme: any
 };
 
-const ServiceItem = ({ service, modalIsOpen, toggleModal, theme }: Props) => {
+const ServiceItem = ({ service, modalIsOpen, toggleModal, theme }: PropTypes) => {
     return (
         <Grid item xs={12} sm={6} md={4} lg={3}>
             <GridListTile onClick={toggleModal} key={service.id} style={getTileStyle(service, theme)}>

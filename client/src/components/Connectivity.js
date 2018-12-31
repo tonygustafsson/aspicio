@@ -29,18 +29,18 @@ const textOfflineStyle = {
     textShadow: '0 0 20px rgba(0, 0, 0, 0.75)'
 };
 
-type PropType = {
+type PropTypes = {
     isAuthenticated: boolean,
     isOnline: boolean,
     services: StatusesType
 };
 
-type StateType = {
+type StateTypes = {
     noOfClicks: number
 };
 
-class Connectivity extends React.Component<PropType, StateType> {
-    constructor(props: PropType, state: StateType) {
+class Connectivity extends React.Component<PropTypes, StateTypes> {
+    constructor(props: PropTypes, state: StateTypes) {
         super(props);
 
         this.state = {

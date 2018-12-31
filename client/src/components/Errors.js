@@ -11,6 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withRoot from '../withRoot';
+import type { ErrorType } from '../types';
 
 let getTableContainerStyle = service => {
     return {
@@ -22,7 +23,12 @@ const ArePropsEqual = (prevProps, nextProps): boolean => {
     return JSON.stringify(prevProps.errors) === JSON.stringify(nextProps.errors);
 };
 
-const Errors = ({ isAuthenticated, errors }) => {
+type PropTypes = {
+    isAuthenticated: boolean,
+    errors: Array<ErrorType>
+};
+
+const Errors = ({ isAuthenticated, errors }: PropTypes) => {
     if (!isAuthenticated || !errors) {
         return <div />;
     }

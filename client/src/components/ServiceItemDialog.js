@@ -15,14 +15,14 @@ import TableRow from '@material-ui/core/TableRow';
 import withRoot from '../withRoot';
 import type { StatusType } from '../types';
 
-type Props = {
+type PropTypes = {
     service: StatusType,
     modalIsOpen: boolean,
     toggleModal: Function,
     toggleServiceState: Function
 };
 
-const ServiceItemDialog = ({ service, modalIsOpen, toggleModal, toggleServiceState }: Props) => {
+const ServiceItemDialog = ({ service, modalIsOpen, toggleModal, toggleServiceState }: PropTypes) => {
     return (
         <Dialog open={modalIsOpen} onClose={toggleModal}>
             <DialogTitle>{service.name}</DialogTitle>

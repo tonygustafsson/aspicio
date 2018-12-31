@@ -50,16 +50,16 @@ const goToGithub = () => {
     window.location.href = 'https://github.com/tonygustafsson/aspicio';
 };
 
-type HeaderType = {
-    isAuthenticated: boolean,
-    hasErrors: boolean
-};
-
 const ArePropsEqual = (prevProps, nextProps): boolean => {
     return prevProps.hasErrors === nextProps.hasErrors;
 };
 
-const Header = ({ isAuthenticated, hasErrors }: HeaderType) => {
+type PropTypes = {
+    isAuthenticated: boolean,
+    hasErrors: boolean
+};
+
+const Header = ({ isAuthenticated, hasErrors }: PropTypes) => {
     if (!isAuthenticated) {
         return <div />;
     }

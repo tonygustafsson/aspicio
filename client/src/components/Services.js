@@ -7,12 +7,19 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import withRoot from '../withRoot';
+import type { StatusType } from '../types';
 
 const ArePropsEqual = (prevProps, nextProps) => {
     return JSON.stringify(prevProps.services) === JSON.stringify(nextProps.services);
 };
 
-const Services = ({ isAuthenticated, services, heading }) => {
+type PropTypes = {
+    isAuthenticated: boolean,
+    services: Array<StatusType>,
+    heading: string
+};
+
+const Services = ({ isAuthenticated, services, heading }: PropTypes) => {
     if (!isAuthenticated || !services || services.length < 1) {
         return <div />;
     }
