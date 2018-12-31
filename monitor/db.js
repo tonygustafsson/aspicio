@@ -34,16 +34,20 @@ let getIdFromName = name => {
     return name;
 };
 
-let saveState = (name, url, serverIsUp, requestTime = 0, error = '') => {
+let saveState = (name, url, serverIsUp, requestTime = 0, error) => {
     let newState = {
         name: name,
         id: getIdFromName(name),
         time: moment.now(),
         url: url,
         serverIsUp: serverIsUp,
-        requestTime: requestTime,
-        error: error
+        requestTime: requestTime
     };
+
+    if (error) {
+        newState.lastErrorTime = moment.now();
+        newState.lastError = error;
+    }
 
     if (stateTable) {
         let server = stateTable.findObject({
@@ -54,7 +58,11 @@ let saveState = (name, url, serverIsUp, requestTime = 0, error = '') => {
             server.time = newState.time;
             server.serverIsUp = newState.serverIsUp;
             server.requestTime = newState.requestTime;
-            server.error = newState.error;
+
+            if (error) {
+                server.lastErrorTime = moment.now();
+                server.lastError = error;
+            }
 
             stateTable.update(server);
         } else {

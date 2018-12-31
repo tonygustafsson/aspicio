@@ -13,11 +13,19 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import withRoot from '../withRoot';
+import type { StatusType } from '../types';
 
 let locale = require('moment/locale/sv');
 moment.updateLocale('sv', locale);
 
-const ServiceItemDialog = ({ service, modalIsOpen, toggleModal, toggleServiceState }) => {
+type Props = {
+    service: StatusType,
+    modalIsOpen: boolean,
+    toggleModal: Function,
+    toggleServiceState: Function
+};
+
+const ServiceItemDialog = ({ service, modalIsOpen, toggleModal, toggleServiceState }: Props) => {
     return (
         <Dialog open={modalIsOpen} onClose={toggleModal}>
             <DialogTitle>{service.name}</DialogTitle>
@@ -52,10 +60,28 @@ const ServiceItemDialog = ({ service, modalIsOpen, toggleModal, toggleServiceSta
                         </TableRow>
 
                         <TableRow>
-                            <TableCell>{service.error.length < 1 && <span />}</TableCell>
-                            <TableCell>{service.error.length < 1 && <span>No recorded errors so far.</span>}</TableCell>
-                            <TableCell>{service.error.length > 0 && <span>Last error</span>}</TableCell>
-                            <TableCell>{service.error.length > 0 && <span>service.error</span>}</TableCell>
+                            {!service.lastError && (
+                                <TableCell>
+                                    <span />
+                                </TableCell>
+                            )}
+                            {!service.lastError && (
+                                <TableCell>
+                                    <span>No recorded errors so far.</span>
+                                </TableCell>
+                            )}
+                            {service.lastError && (
+                                <TableCell>
+                                    <span>Last error</span>
+                                </TableCell>
+                            )}
+                            {service.lastError && (
+                                <TableCell>
+                                    <strong>{moment(service.lastErrorTime).format('LLLL')}:</strong>
+                                    <br />
+                                    <span>{service.lastError}</span>
+                                </TableCell>
+                            )}
                         </TableRow>
                     </TableBody>
                 </Table>
