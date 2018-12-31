@@ -3,6 +3,8 @@ const app = express();
 const cors = require('cors');
 const http = require('http');
 const socket = require('socket.io');
+const moment = require('moment');
+
 app.use(cors());
 
 const configPath = '../config.json';
@@ -15,6 +17,25 @@ const path = require('path');
 const loki = require('lokijs');
 const dbLocation = path.resolve(__dirname, `../${config.dbName}`);
 const lokiDB = new loki(dbLocation);
+
+const mergeStateWithConfig = service => {
+    var configService = config.services.find(confService => {
+        return confService.name === service.name;
+    });
+
+    service.description = configService.description;
+
+    if (typeof configService.enabled === 'number' && moment(configService.enabled).isBefore(moment.now())) {
+        // Enabled in the future, enable if time has passed
+        configService.enabled = true;
+        saveConfig(config);
+        console.log('Enabling service after pause: ' + service.name + '!');
+    }
+
+    service.enabled = configService.enabled;
+
+    return service;
+};
 
 let prevData = {},
     prevDataExists = () => Object.keys(prevData).length > 0,
@@ -38,23 +59,8 @@ let getStatus = async () => {
                     serverIsUp: false
                 });
 
-                onlineServices.forEach(service => {
-                    var configService = config.services.find(confService => {
-                        return confService.name === service.name;
-                    });
-
-                    service.description = configService.description;
-                    service.enabled = configService.enabled;
-                });
-
-                offlineServices.forEach(service => {
-                    var configService = config.services.find(confService => {
-                        return confService.name === service.name;
-                    });
-
-                    service.description = configService.description;
-                    service.enabled = configService.enabled;
-                });
+                onlineServices.map(mergeStateWithConfig);
+                offlineServices.map(mergeStateWithConfig);
 
                 let status = {
                     online: onlineServices,
