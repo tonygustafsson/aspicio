@@ -1,7 +1,12 @@
 // @flow
 
 import socketContext from '../socketContext';
-import type { DataFromApiType } from '../types'
+import type { ErrorType, ServicesType } from '../types'
+
+type DataFromApiType = {
+    errors?: Array<ErrorType>,
+    status?: ServicesType
+};
 
 export function itemsFetchDataSuccess(data: DataFromApiType) {
     return {

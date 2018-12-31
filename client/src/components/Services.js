@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import withRoot from '../withRoot';
-import type { StatusType } from '../types';
+import type { ServiceType } from '../types';
 
 const ArePropsEqual = (prevProps, nextProps) => {
     return JSON.stringify(prevProps.services) === JSON.stringify(nextProps.services);
@@ -15,7 +15,7 @@ const ArePropsEqual = (prevProps, nextProps) => {
 
 type PropTypes = {
     isAuthenticated: boolean,
-    services: Array<StatusType>,
+    services: Array<ServiceType>,
     heading: string
 };
 

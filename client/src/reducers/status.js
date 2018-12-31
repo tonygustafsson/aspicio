@@ -1,10 +1,10 @@
 // @flow
 
-import type { StatusesType, ErrorType } from '../types';
+import type { ServicesType, ErrorType } from '../types';
 
 type ActionStatusType = {
     type: string,
-    status: StatusesType
+    status: ServicesType
 };
 
 type ActionErrorsType = {

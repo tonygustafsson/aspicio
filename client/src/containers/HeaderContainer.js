@@ -2,11 +2,11 @@
 
 import { connect } from 'react-redux';
 import Header from '../components/Header';
-import type { StatusesType } from '../types';
+import type { ServicesType } from '../types';
 
 type StateType = {
     isAuthenticated: boolean,
-    status: StatusesType
+    status: ServicesType
 };
 
 const mapStateToProps = (state: StateType) => {

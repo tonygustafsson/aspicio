@@ -2,10 +2,10 @@
 
 import React from 'react';
 import ServiceItem from '../components/ServiceItem';
-import type { StatusType } from '../types';
+import type { ServiceType } from '../types';
 
 type PropType = {
-    service: StatusType
+    service: ServiceType
 };
 
 type StateType = {

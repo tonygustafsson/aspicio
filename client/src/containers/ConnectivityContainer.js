@@ -2,12 +2,12 @@
 
 import { connect } from 'react-redux';
 import Connectivity from '../components/Connectivity';
-import type { StatusesType } from '../types';
+import type { ServicesType } from '../types';
 
 type StateType = {
     isAuthenticated: boolean,
     isOnline: boolean,
-    status: StatusesType
+    status: ServicesType
 };
 
 const mapStateToProps = (state: StateType) => {

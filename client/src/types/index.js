@@ -1,4 +1,5 @@
 // @flow
 
 export * from './initialState';
-export * from './apiData';
+export * from './services';
+export * from './errors';

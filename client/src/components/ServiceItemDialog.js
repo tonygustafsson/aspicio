@@ -13,10 +13,10 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import withRoot from '../withRoot';
-import type { StatusType } from '../types';
+import type { ServiceType } from '../types';
 
 type PropTypes = {
-    service: StatusType,
+    service: ServiceType,
     modalIsOpen: boolean,
     toggleModal: Function,
     toggleServiceState: Function

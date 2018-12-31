@@ -2,7 +2,7 @@
 
 import React from 'react';
 import withRoot from '../withRoot';
-import type { StatusesType } from '../types';
+import type { ServicesType } from '../types';
 
 const constants = require('../constants');
 
@@ -32,7 +32,7 @@ const textOfflineStyle = {
 type PropTypes = {
     isAuthenticated: boolean,
     isOnline: boolean,
-    services: StatusesType
+    services: ServicesType
 };
 
 type StateTypes = {
