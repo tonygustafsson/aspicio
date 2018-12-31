@@ -2,6 +2,7 @@
 
 import React from 'react';
 import moment from 'moment';
+import locale from 'moment/locale/sv';
 import ServiceItemDialogContainer from '../containers/ServiceItemDialogContainer';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
@@ -11,7 +12,6 @@ import InfoIcon from '@material-ui/icons/Info';
 import withRoot from '../withRoot';
 import { withTheme } from '@material-ui/core/styles';
 
-let locale = require('moment/locale/sv');
 moment.updateLocale('sv', locale);
 
 const green = 'rgb(30, 74, 32)';
