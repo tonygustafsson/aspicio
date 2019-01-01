@@ -4,6 +4,8 @@ const cors = require('cors');
 const http = require('http');
 const socket = require('socket.io');
 const moment = require('moment');
+const locale = require('moment/locale/sv');
+moment.updateLocale('sv', locale);
 
 app.use(cors());
 
