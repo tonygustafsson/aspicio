@@ -9,7 +9,6 @@ import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
 import withRoot from '../withRoot';
 import { withTheme } from '@material-ui/core/styles';
-
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -20,9 +19,7 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-
 import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
@@ -105,40 +102,6 @@ const ServiceItem = ({ service, modalIsOpen, pauseForSelectValue, toggleModal, t
                             </TableRow>
 
                             <TableRow>
-                                <TableCell>Paused</TableCell>
-                                <TableCell>
-                                    {service.enabled && typeof service.enabled !== 'number' && (
-                                        <div>
-                                            <p>No</p>
-
-                                            <FormControl>
-                                                <InputLabel>Pause for...</InputLabel>
-                                                <Select
-                                                    onChange={e => changePauseSelectValue(e.target.value)}
-                                                    value={pauseForSelectValue}
-                                                    style={{ width: '300px', marginBottom: '15px' }}
-                                                >
-                                                    <MenuItem selected value={0}>
-                                                        Indefinitly
-                                                    </MenuItem>
-                                                    <MenuItem value={15}>15 minutes</MenuItem>
-                                                    <MenuItem value={30}>30 minutes</MenuItem>
-                                                    <MenuItem value={60}>1 hour</MenuItem>
-                                                    <MenuItem value={240}>4 hour</MenuItem>
-                                                    <MenuItem value={480}>8 hour</MenuItem>
-                                                    <MenuItem value={1440}>24 hour</MenuItem>
-                                                </Select>
-                                            </FormControl>
-                                        </div>
-                                    )}
-                                    {!service.enabled && typeof service.enabled !== 'number' && <span>Yes</span>}
-                                    {service.enabled && typeof service.enabled === 'number' && (
-                                        <span>Yes, will be paused until {moment(service.enabled).format('LLLL')}</span>
-                                    )}
-                                </TableCell>
-                            </TableRow>
-
-                            <TableRow>
                                 {!service.lastError && (
                                     <TableCell>
                                         <span />
@@ -164,12 +127,49 @@ const ServiceItem = ({ service, modalIsOpen, pauseForSelectValue, toggleModal, t
                             </TableRow>
                         </TableBody>
                     </Table>
+
+                    {service.enabled && typeof service.enabled !== 'number' && (
+                        <>
+                            <p>This service is currently active.</p>
+
+                            <form autoComplete="off">
+                                <FormControl style={{ width: '100%' }}>
+                                    <InputLabel>Pause for...</InputLabel>
+                                    <Select
+                                        onChange={e => changePauseSelectValue(e.target.value)}
+                                        value={pauseForSelectValue}
+                                        native
+                                        style={{ minWidth: 200, marginBottom: '15px' }}
+                                    >
+                                        <option value={0}>Indefinitly</option>
+                                        <option value={1}>1 minute</option>
+                                        <option value={15}>15 minutes</option>
+                                        <option value={30}>30 minutes</option>
+                                        <option value={60}>1 hour</option>
+                                        <option value={240}>4 hour</option>
+                                        <option value={480}>8 hour</option>
+                                        <option value={1440}>24 hour</option>
+                                    </Select>
+
+                                    <Button onClick={() => toggleServiceState(service.name, pauseForSelectValue)}>Pause</Button>
+                                </FormControl>
+                            </form>
+                        </>
+                    )}
+                    {!service.enabled && typeof service.enabled !== 'number' && (
+                        <FormControl style={{ width: '100%' }}>
+                            <p>This service is paused indefinitly.</p>
+                            <Button onClick={() => toggleServiceState(service.name)}>Start service</Button>
+                        </FormControl>
+                    )}
+                    {service.enabled && typeof service.enabled === 'number' && (
+                        <FormControl style={{ width: '100%' }}>
+                            <p>This service is paused until {moment(service.enabled).format('LLLL')}</p>
+                            <Button onClick={() => toggleServiceState(service.name)}>Start service</Button>
+                        </FormControl>
+                    )}
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={() => toggleServiceState(service.name)} color="secondary">
-                        {service.enabled && <span>Pause service</span>}
-                        {!service.enabled && <span>Start service</span>}
-                    </Button>
                     <Button onClick={toggleModal} color="primary" autoFocus>
                         Close
                     </Button>

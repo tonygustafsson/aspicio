@@ -26,6 +26,7 @@ class ServiceItemContainer extends React.PureComponent<PropType, StateType> {
         };
 
         this.toggleModal = this.toggleModal.bind(this);
+        this.changePauseSelectValue = this.changePauseSelectValue.bind(this);
     }
 
     toggleModal: () => void;
@@ -48,6 +49,7 @@ class ServiceItemContainer extends React.PureComponent<PropType, StateType> {
             <ServiceItem
                 service={this.props.service}
                 modalIsOpen={this.state.modalIsOpen}
+                pauseForSelectValue={this.state.pauseForSelectValue}
                 toggleModal={this.toggleModal}
                 changePauseSelectValue={this.changePauseSelectValue}
                 toggleServiceState={this.props.toggleServiceState}
@@ -62,8 +64,8 @@ const mapStateToProps = (state: StateType) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        toggleServiceState: serviceId => {
-            dispatch(sendServiceState(serviceId));
+        toggleServiceState: (serviceId, pauseForNoOfMinutes) => {
+            dispatch(sendServiceState(serviceId, pauseForNoOfMinutes));
         }
     };
 };

@@ -29,9 +29,9 @@ const mergeStateWithConfig = service => {
 
     if (typeof configService.enabled === 'number' && moment(configService.enabled).isBefore(moment.now())) {
         // Enabled in the future, enable if time has passed
+        console.log('Enabling service after pause: ' + service.name + ' (timed out ' + moment(configService.enabled).format('LLLL') + ')');
         configService.enabled = true;
         saveConfig(config);
-        console.log('Enabling service after pause: ' + service.name + '!');
     }
 
     service.enabled = configService.enabled;
@@ -121,15 +121,30 @@ io.on('connection', async socket => {
     socket.emit('NewData', data);
 
     socket.on('ToggleServiceState', data => {
+        let serviceId = data.serviceId,
+            pauseForNoOfMinutes = parseInt(data.pauseForNoOfMinutes);
+
         var configService = config.services.find(confService => {
-            return confService.name === data.serviceId;
+            return confService.name === serviceId;
         });
 
-        configService.enabled = !configService.enabled;
+        if (!configService.enabled) {
+            // Turn on if paused
+            configService.enabled = true;
+        } else {
+            // If user want to pause, check the number of minutes to set it to
+            configService.enabled =
+                pauseForNoOfMinutes === 0
+                    ? false
+                    : moment()
+                          .add(pauseForNoOfMinutes, 'minutes')
+                          .valueOf();
+        }
+
         saveConfig(config);
 
         console.log('ToggleServiceState: ' + configService.name);
-        socket.emit('ToggleServiceStateSuccess', data.serviceId);
+        socket.emit('ToggleServiceStateSuccess', serviceId);
     });
 
     socket.on('disconnect', () => console.log(`Client disconnected with ID ${socket.id}`));
