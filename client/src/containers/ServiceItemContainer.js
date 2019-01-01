@@ -1,29 +1,35 @@
 // @flow
 
 import React from 'react';
+import { connect } from 'react-redux';
 import ServiceItem from '../components/ServiceItem';
+import { sendServiceState } from '../actions';
 import type { ServiceType } from '../types';
 
 type PropType = {
-    service: ServiceType
+    service: ServiceType,
+    toggleServiceState: Function
 };
 
 type StateType = {
-    modalIsOpen: boolean
+    modalIsOpen: boolean,
+    pauseForSelectValue: number
 };
 
-class ServiceItemContainer extends React.Component<PropType, StateType> {
+class ServiceItemContainer extends React.PureComponent<PropType, StateType> {
     constructor(props: PropType, state: StateType) {
         super(props);
 
         this.state = {
-            modalIsOpen: false
+            modalIsOpen: false,
+            pauseForSelectValue: 0
         };
 
         this.toggleModal = this.toggleModal.bind(this);
     }
 
     toggleModal: () => void;
+    changePauseSelectValue: () => void;
 
     toggleModal() {
         this.setState({
@@ -31,9 +37,38 @@ class ServiceItemContainer extends React.Component<PropType, StateType> {
         });
     }
 
+    changePauseSelectValue(value: number) {
+        this.setState({
+            pauseForSelectValue: value
+        });
+    }
+
     render() {
-        return <ServiceItem service={this.props.service} modalIsOpen={this.state.modalIsOpen} toggleModal={this.toggleModal} />;
+        return (
+            <ServiceItem
+                service={this.props.service}
+                modalIsOpen={this.state.modalIsOpen}
+                toggleModal={this.toggleModal}
+                changePauseSelectValue={this.changePauseSelectValue}
+                toggleServiceState={this.props.toggleServiceState}
+            />
+        );
     }
 }
 
-export default ServiceItemContainer;
+const mapStateToProps = (state: StateType) => {
+    return {};
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        toggleServiceState: serviceId => {
+            dispatch(sendServiceState(serviceId));
+        }
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ServiceItemContainer);
