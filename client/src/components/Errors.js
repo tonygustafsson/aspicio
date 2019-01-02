@@ -13,10 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import withRoot from '../withRoot';
 import type { ErrorType } from '../types';
 
-let getTableContainerStyle = service => {
-    return {
-        overflowX: 'auto'
-    };
+const getTableContainerStyle = {
+    overflowX: 'auto'
 };
 
 const ArePropsEqual = (prevProps, nextProps): boolean => {
@@ -35,7 +33,7 @@ const Errors = ({ isAuthenticated, errors }: PropTypes) => {
 
     return (
         <Grid item xs={12}>
-            <Paper style={getTableContainerStyle()}>
+            <Paper style={getTableContainerStyle}>
                 <Typography component="h1" variant="h4" gutterBottom>
                     Errors
                 </Typography>

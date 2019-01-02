@@ -7,6 +7,8 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
+import PlayIcon from '@material-ui/icons/PlayArrow';
+import PauseIcon from '@material-ui/icons/Pause';
 import withRoot from '../withRoot';
 import { withTheme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -27,7 +29,7 @@ const green = 'rgb(30, 74, 32)';
 const red = 'rgb(128, 18, 18)';
 const yellow = 'rgb(148, 127, 27)';
 
-let getTileStyle = (service, theme) => {
+const getTileStyle = service => {
     return {
         width: 'calc(100% - 20px)',
         background: `url("img/services/${service.id}.svg") no-repeat`,
@@ -38,7 +40,7 @@ let getTileStyle = (service, theme) => {
     };
 };
 
-let getgridListTileBarStyle = service => {
+const getgridListTileBarStyle = service => {
     if (!service.enabled) return { backgroundColor: yellow };
     if (typeof service.enabled === 'number') return { backgroundColor: yellow };
 
@@ -47,8 +49,22 @@ let getgridListTileBarStyle = service => {
     };
 };
 
-let getButtonStyle = {
+const getButtonStyle = {
     color: '#fff'
+};
+
+const getMainServiceIconStyle = enabled => {
+    return {
+        right: 0,
+        position: 'absolute',
+        width: 48,
+        height: 48,
+        display: enabled === true ? 'none' : 'block'
+    };
+};
+
+const getTableContainerStyle = {
+    overflowX: 'auto'
 };
 
 type PropTypes = {
@@ -57,14 +73,15 @@ type PropTypes = {
     pauseForSelectValue: number,
     toggleModal: boolean,
     toggleServiceState: Function,
-    changePauseSelectValue: Function,
-    theme: any
+    changePauseSelectValue: Function
 };
 
-const ServiceItem = ({ service, modalIsOpen, pauseForSelectValue, toggleModal, toggleServiceState, changePauseSelectValue, theme }: PropTypes) => {
+const ServiceItem = ({ service, modalIsOpen, pauseForSelectValue, toggleModal, toggleServiceState, changePauseSelectValue }: PropTypes) => {
     return (
         <Grid item xs={12} sm={6} md={4} lg={3}>
-            <GridListTile onClick={toggleModal} key={service.id} style={getTileStyle(service, theme)}>
+            <GridListTile onClick={toggleModal} key={service.id} style={getTileStyle(service)}>
+                <PauseIcon style={getMainServiceIconStyle(service.enabled)} />
+
                 <GridListTileBar
                     title={service.name + ' (' + service.requestTime + 'ms)'}
                     subtitle={<span>{moment(service.time).format('LLLL')}</span>}
@@ -77,7 +94,7 @@ const ServiceItem = ({ service, modalIsOpen, pauseForSelectValue, toggleModal, t
                 />
             </GridListTile>
 
-            <Dialog open={modalIsOpen} onClose={toggleModal}>
+            <Dialog style={getTableContainerStyle} open={modalIsOpen} onClose={toggleModal}>
                 <DialogTitle>{service.name}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">{service.description}</DialogContentText>
@@ -134,43 +151,89 @@ const ServiceItem = ({ service, modalIsOpen, pauseForSelectValue, toggleModal, t
 
                             <form autoComplete="off">
                                 <FormControl style={{ width: '100%' }}>
-                                    <InputLabel>Pause for...</InputLabel>
-                                    <Select
-                                        onChange={e => changePauseSelectValue(e.target.value)}
-                                        value={pauseForSelectValue}
-                                        native
-                                        style={{ minWidth: 200, marginBottom: '15px' }}
-                                    >
-                                        <option value={0}>Indefinitly</option>
-                                        <option value={1}>1 minute</option>
-                                        <option value={15}>15 minutes</option>
-                                        <option value={30}>30 minutes</option>
-                                        <option value={60}>1 hour</option>
-                                        <option value={240}>4 hour</option>
-                                        <option value={480}>8 hour</option>
-                                        <option value={1440}>24 hour</option>
-                                    </Select>
+                                    <Grid container>
+                                        <Grid item xs={12} sm={9}>
+                                            <InputLabel>Pause for...</InputLabel>
 
-                                    <Button onClick={() => toggleServiceState(service.name, pauseForSelectValue)}>Pause</Button>
+                                            <Select
+                                                onChange={e => changePauseSelectValue(e.target.value)}
+                                                value={pauseForSelectValue}
+                                                native
+                                                style={{ width: '100%', marginBottom: 40 }}
+                                            >
+                                                <option value={0}>Indefinitly</option>
+                                                <option value={1}>1 minute</option>
+                                                <option value={15}>15 minutes</option>
+                                                <option value={30}>30 minutes</option>
+                                                <option value={60}>1 hour</option>
+                                                <option value={240}>4 hours</option>
+                                                <option value={480}>8 hours</option>
+                                                <option value={1440}>24 hours</option>
+                                            </Select>
+                                        </Grid>
+                                        <Grid item xs={12} sm={1} />
+                                        <Grid item xs={12} sm={2}>
+                                            <Button
+                                                variant="outlined"
+                                                style={{ width: '100%', marginTop: 15 }}
+                                                size="small"
+                                                color="secondary"
+                                                onClick={() => toggleServiceState(service.name, pauseForSelectValue)}
+                                            >
+                                                <PauseIcon />
+                                                Pause
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
                                 </FormControl>
                             </form>
                         </>
                     )}
                     {!service.enabled && typeof service.enabled !== 'number' && (
                         <FormControl style={{ width: '100%' }}>
-                            <p>This service is paused indefinitly.</p>
-                            <Button onClick={() => toggleServiceState(service.name)}>Start service</Button>
+                            <Grid container>
+                                <Grid item xs={12}>
+                                    <p>This service is paused indefinitly.</p>
+
+                                    <Button
+                                        variant="outlined"
+                                        style={{ width: '100%', marginTop: 15 }}
+                                        size="small"
+                                        color="secondary"
+                                        onClick={() => toggleServiceState(service.name)}
+                                    >
+                                        <PlayIcon />
+                                        Start service
+                                    </Button>
+                                </Grid>
+                            </Grid>
                         </FormControl>
                     )}
                     {service.enabled && typeof service.enabled === 'number' && (
                         <FormControl style={{ width: '100%' }}>
-                            <p>This service is paused until {moment(service.enabled).format('LLLL')}</p>
-                            <Button onClick={() => toggleServiceState(service.name)}>Start service</Button>
+                            <Grid container>
+                                <Grid item xs={12}>
+                                    <p>
+                                        <strong>This service is paused until {moment(service.enabled).format('LLLL')}</strong>
+                                    </p>
+
+                                    <Button
+                                        variant="outlined"
+                                        style={{ width: '100%', marginTop: 15 }}
+                                        size="small"
+                                        color="secondary"
+                                        onClick={() => toggleServiceState(service.name)}
+                                    >
+                                        <PlayIcon />
+                                        Start service
+                                    </Button>
+                                </Grid>
+                            </Grid>
                         </FormControl>
                     )}
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={toggleModal} color="primary" autoFocus>
+                    <Button onClick={toggleModal} variant="outlined" color="primary" autoFocus>
                         Close
                     </Button>
                 </DialogActions>

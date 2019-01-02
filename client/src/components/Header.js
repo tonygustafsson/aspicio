@@ -16,6 +16,7 @@ const red = 'rgb(128, 18, 18)';
 const appBarStyle = hasErrors => {
     return {
         backgroundColor: hasErrors ? red : green,
+        color: '#fff',
         margin: 0
     };
 };

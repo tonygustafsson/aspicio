@@ -7,7 +7,6 @@ import OfflineServicesContainer from '../containers/OfflineServicesContainer';
 import ErrorsContainer from '../containers/ErrorsContainer';
 import ConnectivityContainer from '../containers/ConnectivityContainer';
 import Grid from '@material-ui/core/Grid';
-import moment from 'moment';
 
 const App = () => {
     return (
