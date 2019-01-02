@@ -88,21 +88,22 @@ All configuration is done in ./config.json.
 Images for services on the client is in ./client/public/img/services and the name of the image have
 to be id.svg. The ID is not configurable, but is generated automatically. "Time is" becomes time-is.svg and so on.
 
--   services: An array with service objects
+-   **services**: An array with service objects
     -   name: The display name of the service
     -   url: The URL to check against, could include a network port. HTTP and HTTPS supported.
     -   findString: A string to look for in the HTML response to verify that the site is really up.
     -   description: A longer description for the client
     -   enabled: If false it will be checked and the client will show the service as paused.
--   dbName: The JSON database name.
--   dbLogTableName: The table name for logs, including log/warning/error. No need to change this.
--   dbStateTableName: The table name for states for each service. No need to change this.
--   dbNoErrosToGet: How many errors to display on the client.
--   serverPort: The server port. The client must match this to be able to communicate.
--   serverCheckForChangesMs: How often the server should look at the output from the monitor. It will not push to clients if no change is made so this can be low. In milliseconds.
--   monitorCheckServices: How often the monitor will check the services, in cron format.
--   clientUrl: The URL to the client, including port.
--   slackEnabled: Boolean. Use Slack integration or not.
--   slackHookUrl: The Hook URL to be able to communicate and authenticate to Slack.
--   slackUserName: The username that is showed in Slack.
--   slackIcon: The icon for the username that is showed in Slack.
+-   **dbName**: The JSON database name.
+-   **dbLogTableName**: The table name for logs, including log/warning/error. No need to change this.
+-   **dbStateTableName**: The table name for states for each service. No need to change this.
+-   **dbNoErrosToGet**: How many errors to display on the client.
+-   **serverPort**: The server port. The client must match this to be able to communicate.
+-   **serverSocketUrl**: The server socket URL that the client will connect to.
+-   **serverCheckForChangesMs**: How often the server should look at the output from the monitor. It will not push to clients if no change is made so this can be low. In milliseconds.
+-   **monitorCheckServices**: How often the monitor will check the services, in cron format.
+-   **clientUrl**: The URL to the client, including port.
+-   **slackEnabled**: Boolean. Use Slack integration or not.
+-   **slackHookUrl**: The Hook URL to be able to communicate and authenticate to Slack.
+-   **slackUserName**: The username that is showed in Slack.
+-   **slackIcon**: The icon for the username that is showed in Slack.
