@@ -14,6 +14,22 @@ It's also equipped to be used as a dashboard on a TV or tablet somewhere.
 
 It works on Linux, MacOS and Windows.
 
+## Tech
+
+### Monitor
+
+The monitor is a NodeJS server with Axios that contacts all services defined in ./config.json.
+
+### Server
+
+The server is a websocket server that sends and recieves events. Will emit socket events on database changes.
+
+### Client
+
+The client is built with React and Redux, with a socket.io middleware that triggers redux actions.
+
+It uses Flow for type control and MaterialUI for the design framework.
+
 ## Screenshot
 
 ![Aspicio screenshot](aspicio-screenshot.png 'Aspicio screenshot')
@@ -80,6 +96,12 @@ source code so this is in no way secure.
 Change the constants in ./client/src/constants/token.js. To be able to view the client you'll
 need to add a localStorage item named AspicioToken with this token in it. Leave the token empty to
 allow all.
+
+## Socket events
+
+-   **NewData**: Sent from server when new data is available. Will only send when the current data is different from before.
+-   **ToggleServiceState**: Sent from client when wanting to change a service to active/paused.
+-   **ToggleServiceStateSuccess**: Sent from server when a service is changed to active/paused.
 
 ## Configuration
 
