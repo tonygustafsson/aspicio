@@ -9,7 +9,6 @@
         "moment": "^2.22.2",
         "react": "^16.6.0",
         "react-dom": "^16.6.0",
-        "react-proptypes": "^1.0.0",
         "react-redux": "^5.1.0",
         "react-scripts": "2.1.0",
         "redux": "^4.0.1",
