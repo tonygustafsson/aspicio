@@ -13,7 +13,8 @@ const mapStateToProps = (state: StateType) => {
     return {
         isAuthenticated: state.isAuthenticated,
         services: state && state.status && state.status.offline ? state.status.offline : [],
-        heading: 'Offline services'
+        heading: 'Offline services',
+        type: 'offline'
     };
 };
 

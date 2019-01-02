@@ -12,9 +12,17 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withRoot from '../withRoot';
 import type { ErrorType } from '../types';
+import ErrorIcon from '@material-ui/icons/Error';
 
 const getTableContainerStyle = {
     overflowX: 'auto'
+};
+
+const errorIconStyle = {
+    width: 38,
+    height: 38,
+    marginRight: 10,
+    verticalAlign: 'bottom'
 };
 
 const ArePropsEqual = (prevProps, nextProps): boolean => {
@@ -35,6 +43,7 @@ const Errors = ({ isAuthenticated, errors }: PropTypes) => {
         <Grid item xs={12}>
             <Paper style={getTableContainerStyle}>
                 <Typography component="h1" variant="h4" gutterBottom>
+                    <ErrorIcon style={errorIconStyle} />
                     Errors
                 </Typography>
 

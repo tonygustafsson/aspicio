@@ -8,6 +8,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import LanguageIcon from '@material-ui/icons/Language';
 import FullSceenIcon from '@material-ui/icons/Fullscreen';
+import VisibiltyIcon from '@material-ui/icons/Visibility';
 import withRoot from '../withRoot';
 
 const green = 'rgb(30, 74, 32)';
@@ -29,6 +30,13 @@ const fullSceenIconStyle = {
 const infoIconStyle = {
     position: 'absolute',
     right: '70px'
+};
+
+const logoIconStyle = {
+    verticalAlign: 'bottom',
+    marginRight: 10,
+    width: 32,
+    height: 32
 };
 
 const goFullScreen = (): void => {
@@ -70,6 +78,7 @@ const Header = ({ isAuthenticated, hasErrors }: PropTypes) => {
             <AppBar style={appBarStyle(hasErrors)} position="static">
                 <Toolbar>
                     <Typography variant="h6" color="inherit">
+                        <VisibiltyIcon style={logoIconStyle} />
                         Aspicio
                     </Typography>
 
