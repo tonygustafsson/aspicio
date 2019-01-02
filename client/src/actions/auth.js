@@ -10,7 +10,7 @@ export function authenticatedUser(status: boolean) {
 }
 
 export function isAuthenticated() {
-    return (dispatch: function) => {
+    return (dispatch: Function) => {
         var authToken = window.localStorage.getItem(constants.TOKEN.authTokenName);
 
         if (authToken && authToken === constants.TOKEN.authToken) {

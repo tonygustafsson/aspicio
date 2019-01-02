@@ -3,7 +3,7 @@
 type navigorOnlineType = {
     type: string,
     payload: boolean
-}
+};
 
 export const navigatorOnLine = (): navigorOnlineType => {
     return {
@@ -12,8 +12,8 @@ export const navigatorOnLine = (): navigorOnlineType => {
     };
 };
 
-export const listenToWindowEvent = (name: string, mapEventToAction: function) => {
-    return (dispatch: function) => {
+export const listenToWindowEvent = (name: string, mapEventToAction: Function) => {
+    return (dispatch: Function) => {
         window.addEventListener(name, e => {
             dispatch(mapEventToAction(e));
         });

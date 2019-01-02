@@ -1,7 +1,7 @@
 // @flow
 
 import socketContext from '../socketContext';
-import type { ErrorType, ServicesType } from '../types'
+import type { ErrorType, ServicesType } from '../types';
 
 type DataFromApiType = {
     errors?: Array<ErrorType>,
@@ -17,7 +17,7 @@ export function itemsFetchDataSuccess(data: DataFromApiType) {
 }
 
 export function listenForNewData() {
-    return (dispatch: function) => {
+    return (dispatch: Function) => {
         socketContext.on('NewData', (data: DataFromApiType) => {
             dispatch(itemsFetchDataSuccess(data));
         });

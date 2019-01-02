@@ -10,7 +10,7 @@ export function toggleServiceState(serviceId: string) {
 }
 
 export function listenForServiceStateResponse() {
-    return (dispatch: function) => {
+    return (dispatch: Function) => {
         socketContext.on('ToggleServiceStateSuccess', serviceId => {
             dispatch(toggleServiceState(serviceId));
         });
@@ -18,7 +18,7 @@ export function listenForServiceStateResponse() {
 }
 
 export function sendServiceState(serviceId: string, pauseForNoOfMinutes: number) {
-    return (dispatch: function) => {
+    return (dispatch: Function) => {
         socketContext.emit('ToggleServiceState', { serviceId: serviceId, pauseForNoOfMinutes: pauseForNoOfMinutes }, response => {
             dispatch(toggleServiceState(serviceId));
         });
