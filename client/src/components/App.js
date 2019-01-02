@@ -7,10 +7,7 @@ import OfflineServicesContainer from '../containers/OfflineServicesContainer';
 import ErrorsContainer from '../containers/ErrorsContainer';
 import ConnectivityContainer from '../containers/ConnectivityContainer';
 import Grid from '@material-ui/core/Grid';
-
 import moment from 'moment';
-import locale from 'moment/locale/sv';
-moment.updateLocale('sv', locale);
 
 const App = () => {
     return (
