@@ -4,14 +4,14 @@
     "description": "A web monitor for watching services",
     "main": "server.js",
     "dependencies": {
-        "cors": "^2.8.4",
-        "express": "^4.16.4",
-        "fs": "0.0.1-security",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "fs": "0.0.2",
         "http": "0.0.0",
-        "lokijs": "^1.5.5",
-        "moment": "^2.23.0",
+        "lokijs": "^1.5.8",
+        "moment": "^2.24.0",
         "path": "^0.12.7",
-        "socket.io": "^2.1.1"
+        "socket.io": "^2.3.0"
     },
     "devDependencies": {},
     "scripts": {
