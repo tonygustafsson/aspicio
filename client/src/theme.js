@@ -1,21 +1,16 @@
-import React from 'react';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
 import pink from '@material-ui/core/colors/pink';
 import grey from '@material-ui/core/colors/grey';
-import CssBaseline from '@material-ui/core/CssBaseline';
 
 const theme = createMuiTheme({
+    spacing: 4,
     palette: {
         primary: {
-            light: green[300],
-            main: green[500],
-            dark: green[700]
+            main: green[500]
         },
         secondary: {
-            light: pink[300],
-            main: pink[500],
-            dark: pink[700]
+            main: pink[500]
         }
     },
     typography: {
@@ -45,17 +40,4 @@ const theme = createMuiTheme({
     }
 });
 
-function withRoot(Component) {
-    function WithRoot(props) {
-        return (
-            <MuiThemeProvider theme={theme}>
-                <CssBaseline />
-                <Component {...props} />
-            </MuiThemeProvider>
-        );
-    }
-
-    return WithRoot;
-}
-
-export default withRoot;
+export default theme;

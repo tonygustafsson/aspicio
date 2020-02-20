@@ -17,10 +17,7 @@ const initialState: InitialStateType = {
 
 export default function configureStore() {
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-        ? compose(
-              applyMiddleware(thunk),
-              window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__()
-          )
+        ? compose(applyMiddleware(thunk), window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__())
         : compose(applyMiddleware(thunk));
 
     return createStore(rootReducer, initialState, composeEnhancers);

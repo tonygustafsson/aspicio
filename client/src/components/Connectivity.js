@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react';
-import withRoot from '../withRoot';
 import type { ServicesType } from '../types';
 
 const constants = require('../constants');
@@ -96,4 +95,4 @@ class Connectivity extends React.Component<PropTypes, StateTypes> {
     }
 }
 
-export default withRoot(Connectivity);
+export default Connectivity;

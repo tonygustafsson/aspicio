@@ -9,7 +9,6 @@ import IconButton from '@material-ui/core/IconButton';
 import LanguageIcon from '@material-ui/icons/Language';
 import FullSceenIcon from '@material-ui/icons/Fullscreen';
 import VisibiltyIcon from '@material-ui/icons/Visibility';
-import withRoot from '../withRoot';
 
 const green = 'rgb(30, 74, 32)';
 const red = 'rgb(128, 18, 18)';
@@ -82,12 +81,24 @@ const Header = ({ isAuthenticated, hasErrors }: PropTypes) => {
                         Aspicio
                     </Typography>
 
-                    <IconButton title="Read more about Aspicio on GitHub" style={infoIconStyle} color="inherit" aria-label="Menu">
-                        <LanguageIcon onClick={e => goToGithub()} />
+                    <IconButton
+                        title="Read more about Aspicio on GitHub"
+                        style={infoIconStyle}
+                        color="inherit"
+                        aria-label="Menu"
+                        onClick={e => goToGithub()}
+                    >
+                        <LanguageIcon />
                     </IconButton>
 
-                    <IconButton title="Go fullscreen" style={fullSceenIconStyle} color="inherit" aria-label="Menu">
-                        <FullSceenIcon onClick={e => goFullScreen()} />
+                    <IconButton
+                        title="Go fullscreen"
+                        style={fullSceenIconStyle}
+                        color="inherit"
+                        aria-label="Menu"
+                        onClick={e => goFullScreen()}
+                    >
+                        <FullSceenIcon />
                     </IconButton>
                 </Toolbar>
             </AppBar>
@@ -95,4 +106,4 @@ const Header = ({ isAuthenticated, hasErrors }: PropTypes) => {
     );
 };
 
-export default withRoot(React.memo(Header, ArePropsEqual));
+export default React.memo<PropTypes>(Header, ArePropsEqual);

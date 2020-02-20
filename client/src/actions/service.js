@@ -19,8 +19,12 @@ export function listenForServiceStateResponse() {
 
 export function sendServiceState(serviceId: string, pauseForNoOfMinutes: number) {
     return (dispatch: Function) => {
-        socketContext.emit('ToggleServiceState', { serviceId: serviceId, pauseForNoOfMinutes: pauseForNoOfMinutes }, response => {
-            dispatch(toggleServiceState(serviceId));
-        });
+        socketContext.emit(
+            'ToggleServiceState',
+            { serviceId: serviceId, pauseForNoOfMinutes: pauseForNoOfMinutes },
+            response => {
+                dispatch(toggleServiceState(serviceId));
+            }
+        );
     };
 }

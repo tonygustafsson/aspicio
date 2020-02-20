@@ -9,8 +9,6 @@ import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
 import PlayIcon from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
-import withRoot from '../withRoot';
-import { withTheme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -71,12 +69,19 @@ type PropTypes = {
     service: any,
     modalIsOpen: boolean,
     pauseForSelectValue: number,
-    toggleModal: boolean,
+    toggleModal: Function,
     toggleServiceState: Function,
     changePauseSelectValue: Function
 };
 
-const ServiceItem = ({ service, modalIsOpen, pauseForSelectValue, toggleModal, toggleServiceState, changePauseSelectValue }: PropTypes) => {
+const ServiceItem = ({
+    service,
+    modalIsOpen,
+    pauseForSelectValue,
+    toggleModal,
+    toggleServiceState,
+    changePauseSelectValue
+}: PropTypes) => {
     return (
         <Grid item xs={12} sm={6} md={4} lg={3}>
             <GridListTile onClick={toggleModal} key={service.id} style={getTileStyle(service)}>
@@ -214,7 +219,9 @@ const ServiceItem = ({ service, modalIsOpen, pauseForSelectValue, toggleModal, t
                             <Grid container>
                                 <Grid item xs={12}>
                                     <p>
-                                        <strong>This service is paused until {moment(service.enabled).format('LLLL')}</strong>
+                                        <strong>
+                                            This service is paused until {moment(service.enabled).format('LLLL')}
+                                        </strong>
                                     </p>
 
                                     <Button
@@ -242,4 +249,4 @@ const ServiceItem = ({ service, modalIsOpen, pauseForSelectValue, toggleModal, t
     );
 };
 
-export default withRoot(withTheme()(ServiceItem));
+export default ServiceItem;

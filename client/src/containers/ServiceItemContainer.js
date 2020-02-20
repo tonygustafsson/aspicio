@@ -70,7 +70,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(ServiceItemContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ServiceItemContainer);

@@ -13,7 +13,8 @@ function urlBase64ToUint8Array(base64String) {
     return outputArray;
 }
 
-const applicationServerPublicKey = 'BKXEquBlxD_1vF79Jx2NxQb0ASLIfjYl2BIInGrjjYn2U-FNB0XQHZnUJXNZR5mgoVtVuAqgUjK2BR5UD7r8q_s';
+const applicationServerPublicKey =
+    'BKXEquBlxD_1vF79Jx2NxQb0ASLIfjYl2BIInGrjjYn2U-FNB0XQHZnUJXNZR5mgoVtVuAqgUjK2BR5UD7r8q_s';
 const applicationServerKey = urlBase64ToUint8Array(applicationServerPublicKey);
 
 const isLocalhost = Boolean(
@@ -68,7 +69,9 @@ export function register(config) {
                         });
                     }
 
-                    console.log(`This web app is being served cache-first by a service worker. To learn more, visit http://bit.ly/CRA-PWA`);
+                    console.log(
+                        `This web app is being served cache-first by a service worker. To learn more, visit http://bit.ly/CRA-PWA`
+                    );
                 });
             } else {
                 // Is not localhost. Just register service worker
@@ -93,7 +96,9 @@ function registerValidSW(swUrl, config) {
                             // At this point, the updated precached content has been fetched,
                             // but the previous service worker will still serve the older
                             // content until all client tabs are closed.
-                            console.log('New content is available and will be used when all tabs for this page are closed. See http://bit.ly/CRA-PWA.');
+                            console.log(
+                                'New content is available and will be used when all tabs for this page are closed. See http://bit.ly/CRA-PWA.'
+                            );
 
                             // Execute callback
                             if (config && config.onUpdate) {

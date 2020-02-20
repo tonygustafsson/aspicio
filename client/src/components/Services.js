@@ -6,7 +6,6 @@ import GridList from '@material-ui/core/GridList';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import withRoot from '../withRoot';
 import type { ServiceType } from '../types';
 import CloudDoneIcon from '@material-ui/icons/CloudDone';
 import WarningIcon from '@material-ui/icons/Warning';
@@ -25,7 +24,8 @@ const ArePropsEqual = (prevProps, nextProps) => {
 type PropTypes = {
     isAuthenticated: boolean,
     services: Array<ServiceType>,
-    heading: string
+    heading: string,
+    type: string
 };
 
 const Services = ({ isAuthenticated, services, heading, type }: PropTypes) => {
@@ -52,4 +52,4 @@ const Services = ({ isAuthenticated, services, heading, type }: PropTypes) => {
     );
 };
 
-export default withRoot(React.memo(Services, ArePropsEqual));
+export default React.memo<PropTypes>(Services, ArePropsEqual);

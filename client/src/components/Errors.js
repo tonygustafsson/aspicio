@@ -10,7 +10,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import withRoot from '../withRoot';
 import type { ErrorType } from '../types';
 import ErrorIcon from '@material-ui/icons/Error';
 
@@ -76,4 +75,4 @@ const Errors = ({ isAuthenticated, errors }: PropTypes) => {
     );
 };
 
-export default withRoot(React.memo(Errors, ArePropsEqual));
+export default React.memo<PropTypes>(Errors, ArePropsEqual);
