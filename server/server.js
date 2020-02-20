@@ -27,7 +27,9 @@ const mergeStateWithConfig = service => {
 
     if (typeof configService.enabled === 'number' && moment(configService.enabled).isBefore(moment.now())) {
         // Enabled in the future, enable if time has passed
-        console.log('Enabling service after pause: ' + service.name + ' (timed out ' + moment(configService.enabled).format('LLLL') + ')');
+        console.log(
+            `Enabling service after pause ${service.name} (timed out ${moment(configService.enabled).format('LLLL')})`
+        );
         configService.enabled = true;
         saveConfig(config);
     }
