@@ -33,7 +33,6 @@
         "not op_mini all"
     ],
     "devDependencies": {
-        "concurrently": "^6.2.0",
-        "normalize-url": "^1.9.1"
+        "concurrently": "^6.2.0"
     }
 }
