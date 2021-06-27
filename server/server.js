@@ -13,8 +13,8 @@ const server = http.createServer(app);
 const io = socket(server, {
     cors: {
         origin: config.clientUrl.replace(/\/\s*$/, ''),
-        methods: ['GET', 'POST'],
-    },
+        methods: ['GET', 'POST']
+    }
 });
 
 const fs = require('fs');
@@ -23,8 +23,8 @@ const loki = require('lokijs');
 const dbLocation = path.resolve(__dirname, `../${config.dbName}`);
 const lokiDB = new loki(dbLocation);
 
-const mergeStateWithConfig = (service) => {
-    var configService = config.services.find((confService) => {
+const mergeStateWithConfig = service => {
+    var configService = config.services.find(confService => {
         return confService.name === service.name;
     });
 
@@ -63,11 +63,11 @@ let getStatus = async () => {
                 }
 
                 let onlineServices = stateTable.find({
-                    serverIsUp: true,
+                    serverIsUp: true
                 });
 
                 let offlineServices = stateTable.find({
-                    serverIsUp: false,
+                    serverIsUp: false
                 });
 
                 onlineServices.map(mergeStateWithConfig);
@@ -75,7 +75,7 @@ let getStatus = async () => {
 
                 let status = {
                     online: onlineServices,
-                    offline: offlineServices,
+                    offline: offlineServices
                 };
 
                 resolve(status);
@@ -99,7 +99,7 @@ let getErrors = async () => {
                 let errors = logTable
                     .chain()
                     .find({
-                        level: 'error',
+                        level: 'error'
                     })
                     .simplesort('time', true)
                     .limit(config.dbNoErrorsToGet)
@@ -113,27 +113,27 @@ let getErrors = async () => {
     });
 };
 
-let saveConfig = (config) => {
+let saveConfig = config => {
     fs.writeFile(configPath, JSON.stringify(config, null, 4), 'utf8', () => {
         config = config;
     });
 };
 
-io.on('connection', async (socket) => {
+io.on('connection', async socket => {
     console.log(`New client connected with ID ${socket.id}`);
 
     let data = {
         status: await getStatus(),
-        errors: await getErrors(),
+        errors: await getErrors()
     };
 
     socket.emit('NewData', data);
 
-    socket.on('ToggleServiceState', (data) => {
+    socket.on('ToggleServiceState', data => {
         let serviceId = data.serviceId,
             pauseForNoOfMinutes = parseInt(data.pauseForNoOfMinutes);
 
-        var configService = config.services.find((confService) => {
+        var configService = config.services.find(confService => {
             return confService.name === serviceId;
         });
 
@@ -158,7 +158,7 @@ io.on('connection', async (socket) => {
 setInterval(async () => {
     let data = {
         status: await getStatus(),
-        errors: await getErrors(),
+        errors: await getErrors()
     };
 
     if (prevDataExists() && objectsAreIdentical(data, prevData)) {

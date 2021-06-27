@@ -72,7 +72,7 @@ let saveState = (name, url, serverIsUp, requestTime = 0, error) => {
         console.error('Could not insert state!', newState);
     }
 
-    lokiDB.saveDatabase(function(err) {
+    lokiDB.saveDatabase(function (err) {
         if (err) console.error('error saving');
     });
 };
@@ -93,7 +93,7 @@ let saveLog = (level = 'info', name, url, message, requestTime = 0) => {
         console.error('Could not insert log!', newLog);
     }
 
-    lokiDB.saveDatabase(function(err) {
+    lokiDB.saveDatabase(function (err) {
         if (err) console.error('error saving');
     });
 };
