@@ -8,10 +8,10 @@
             "enabled": true
         },
         {
-            "name": "Whats my IP",
-            "url": "https://www.whatismyip.com/ip-address-lookup/",
-            "findString": "UA-4975660-1",
-            "description": "This service get's your current IP address.",
+            "name": "Facebook",
+            "url": "https://www.facebook.com/",
+            "findString": "pollIntervalMs",
+            "description": "A kindof popular social network.",
             "enabled": true
         }
     ],
